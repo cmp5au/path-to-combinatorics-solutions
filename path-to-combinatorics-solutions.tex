@@ -1,0 +1,2648 @@
+\documentclass{book}
+
+\usepackage{enumitem}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage[backref,pdfpagemode=FullScreen,colorlinks=true]{hyperref}
+
+\numberwithin{equation}{section}
+
+\begin{document}
+
+\title{Solutions to \\
+\emph{A Path to Combinatorics for Undergraduates} \\
+by Titu Andreescu and Zuming Feng}
+\author{\href{https://github.com/cmp5au}{Colin Parker}
+and \href{http://profiles.google.com/quantumelixir}{quantumelixir}
+(for some of Chapter 1)}
+\maketitle
+
+\chapter*{small note}
+I am writing this solution manual mostly to motivate myself to finish
+all the problems from this book. As a useful side-effect, I also hope
+that it would be of use to people who are either stuck on a problem or
+want to check their answers against someone else's. However, I am doing
+no great good, and my selfish motives take precedence of course. I make
+no claims of correctness and shamelessly admit that there might well be
+serious mistakes in the answer or in the solution to a problem. I
+encourage you to send me corrections by sending pull-requests through
+\href{http://github.com/cmp5au/path-to-combinatorics}{github}.
+If you are not well-versed with such marvels of the 21st century, you
+can still send me an \href{mailto:colin.parker@gmail.com}{email}
+informing me of the error.
+
+\vspace*{\fill}
+\begin{center}
+\href{http://creativecommons.org/licenses/by-nc-sa/3.0/}{by-nc-sa 3.0}
+\end{center}
+
+\newpage
+\vspace*{\fill}
+\begin{flushright}
+\emph{If people do not believe that mathematics is simple, it is only
+because they do not realize how complicated life is.}\\
+--John von Neumann
+\end{flushright}
+
+\tableofcontents
+
+\vspace*{\fill}
+\emph{Combinatorics is an honest subject. No ad\`eles, no sigma-algebras.
+You count balls in a box, and you either have the right number or you
+haven't. You get the feeling that the result you have discovered is
+forever, because it’s concrete. Other branches of mathematics are not so
+clear-cut. Functional analysis of infinite-dimensional spaces is never
+fully convincing; you don't get a feeling of having done an honest day's
+work. Don't get the wrong idea – combinatorics is not just putting balls
+into boxes. Counting finite sets can be a highbrow undertaking, with
+sophisticated techniques.}\\
+\begin{flushright}
+--Gian-Carlo Rota
+\end{flushright}
+\vspace*{\fill}
+
+\chapter{Addition or Multiplication}
+
+\begin{enumerate}[label={1.\arabic*}]
+
+\item
+The total number of functions from $$\{1, 2, \dots, 1998\} \to \{2000, 2001,
+2002, 2003\}$$ is $4^{1998}$. For each such function $f$, the sum
+$f(1)+f(2)+\dots+f(1998)$ might be either odd or even. If the sum is
+even, then $f(1999)$ can be assigned to either of $\{2001, 2003\}$, and if
+odd, then $f(1999)$ can be assigned to either of $\{2000, 2002\}$. Hence,
+there are two possibilities in each case and required number of
+functions is $2\times4^{1998}=2^{3997}$
+
+Colin's Alt: The total number of functions from
+$$\{1, 2, \dots, 1999\} \to
+\{2000, 2001, 2002, 2003\}$$ is $4^{1999}$. By a similar argument to what is
+given above, half of these sum to even and half sum to odd. Therefore the
+number of functions is $\frac{4^{1999}}{2} = 2^{3997}$
+
+\item
+Let $ab=10a+b$ be the two-digit positive number. For divisibility by
+each of it's digits, we have the divisbility conditions: $a | b$, and
+$b | 10a$. Taking $b=q_1a$ and $10a=q_2b$, we have $q_1q_2=10$. The only
+integer solutions $(q_1,q_2)$ for which are:
+$(1,10),(2,5),(5,2),(10,1)$. For each solution, applying the range
+constraints $0<a,b<10$, we get the final answer $9 + 4 + 1 + 0 = 14$
+
+\item
+We have a bijection between the number of paths from the letter C in
+the first row to each R in the last row, and the number of ways to
+form the word COMPUTER. With the row index as $n$ and the column index
+as $r$, we count the number of paths from the first row to the $(n,
+r)$-th element using the recursion ${n \choose r} = {{n-1} \choose {r-1}}
++ {{n-1} \choose r}$. Hence, coefficients in the last row are exactly the binomial
+coefficients and we have the answer ${7 \choose 0} + {7 \choose 1} + \dots +
+{7 \choose 7} = 2^7 = 128$
+
+Colin's Alt: Any path results in a unique way of spelling COMPUTER, and
+there are 7 binary choices to be made. Therefore the number of ways is $2^7$
+
+\item
+From the given, we know that $n(A) = n(B) = 2^{100}$. As $n(C) = 2^k$, $n(A
+\cup B \cup C) = 2^l$ for some nonnegative integers $k, l$, the only values
+that solve the problem equation are $k = 101, l = 102$. Therefore \newline
+$|C| = 101,
+|A \cup B \cup C| = 102$. We use the equation $$|S_1 \cup S_2| = |S_1| + |S_2| 
+- |S_1 \cap S_2|$$ cyclically on $A$, $B$, and $C$. From here, we know $100 
+\leq |A \cup B| \leq 102$, and $101 \leq |A \cup C|, |B \cup C| \leq 102$;
+using the above equation yields $|A \cap B| \geq 98$, $|A \cap C|, |B \cap
+C| \geq 99$
+Finally, using the 3-element PIE: $$|A \cap B \cap C| = |A \cup B \cup C| -
+(|A| + |B| + |C|) + |A \cap B| + |A \cap C| + |B \cap C|$$ 
+$$\geq 102 - 301 + 98 + 99 + 99 = 97$$.
+
+\item
+The number of ways to order $n$ distinct objects around a circle is
+$(n-1)!$. Within each pair, the twins can be permuted in two ways. Thus,
+the total number of ways to arrange the twins is $(12-1)! \times 2^{12}$
+
+\item
+Colin's Alt: The 4-digit integer and its consecutive number don't require
+carrying when it is of the form $1xyz$, where $x, y \in \{0, 1, 2, 3, 4\}$
+and $z \in \{0, 1, 2, 3, 4, 9\}$. In addition, the 4-digit integers of the
+form $1w99$ where $w \in \{0, 1, 2, 3, 4, 9\}$ don't require carrying when
+added to their subsequent. The total number is $5^2 \cdot 6 + 6 = 156$
+
+\item
+Let the number of black and white marbles in the first and second box be
+$b_1, w_1$ and, $b_2, w_2$ respectively. We are given that $b_1 + w_1 +
+b_2 + w_2 = 25$. $P(\text{both marbles are black}) = \frac{b_1}{b_1+w_1}
+\times \frac{b_2}{b_2+w_2} = \frac{27}{50}$. So have the following
+condition: $(b_1+w_1)+(b_2+w_2)=25$ and $(b_1+w_1)(b_2+w_2)|50$, to
+which the only solutions $(b_1+w_1,b_2+w_2)$ are $(5,20), (10,15)$
+(discarding permutations). When $(b_1+w_1,b_2+w_2)=(5,20)$,
+$b_1b_2=54=2\cdot3^3$ and the only possible solution to the number of
+black balls in the first and second box is $(3,2\cdot3^2)$. This yields
+$\frac{w_1w_2}{(b_1+w_1)(b_2+w_2)}=\frac{(5-3)\cdot(20-2\cdot3^2)}{5\cdot20}=\frac{1}{25}$.
+When $(b_1+w_1,b_2+w_2)=(l0,15)$, $b_1b_2=81=3^4$ and the only possible
+solution to the number of black balls in the first and second box is
+$(3^2,3^2)$. This yields $\frac{w_1w_2}{(b_1+w_1)(b_2+w_2)} =
+\frac{(10-3^2)\cdot(15-3^2)}{10\cdot15} = \frac{1}{25}$. Thus, in each
+case, the answer is $\frac{1}{25}$
+
+N.C. This is a bad problem because it is ambiguous and a lucky chance
+resolves the ambiguity, something like how $\frac{49}{98} = \frac{4}{8}$,
+making it appear as though the $9$s cancel each other.
+
+\item
+Colin's Alt: Placing the girls first, there are $9!$ ways to do so around
+a circle. The boys then can be placed in 10 spots, for a total of $10 \cdot
+9 \cdot 8 \cdot 7$ ways of placing the boys. The girls and boys are placed
+independently, giving $10! \cdot 9 \cdot 8 \cdot 7$ ways in total.
+
+Incorrect solution:
+Separating the $10$ girls by $10$ blank placeholders, we can choose $4$
+places for the boys in $10 \choose 4$ ways. Permuting the girls and
+boys, after choosing where the boys sit, we get a total of
+${10\choose4}10!4!$ ways.
+
+\item
+Each element of $S=\{1, 2, \dots, 2003\}$ goes to one or two sets from
+the ordered triple. There are ${3 \choose 1} + {3 \choose 2} = 6$ ways
+of choosing one or two sets.
+Thus, the total number of ways of assigning all the
+elements from $S$ is $6^{2003}$.
+
+\item
+The question is equivalent to finding the number of increasing
+arithmetic progressions in the set $S=\{1, 2, \dots, 2000\}$.  Suppose
+we choose $1$ as the first term. It is clear that we can only choose the
+odd numbers $\{3, 5, \dots, 1999\}$ for the middle term to be an integer
+and lie in $S$.  There are exactly $1000$ such arithmetic progressions
+beginning with $1$.  We argue similarly when the first term is $2, 3,
+\dots, 1998$. Thus, the total number of ways to select a three term
+increasing arithmetic progression from $S$ is $\underbrace{1000}_{1} +
+\underbrace{1000}_{2} + \underbrace{999}_{3} + \underbrace{999}_{4} +
+\dots + \underbrace{2}_{1997} + \underbrace{2}_{1998} =
+2\times\left(\frac{(1000)(1001)}{2}-1\right) = 1000\times1001-2 =
+1000998$.
+
+\item
+For the polygon $[P_1 P_2 \dots P_n]$, choose $i$ such that a triangle
+is given by $P_{i+1} P_{i+2} P_i$. Then the next triangle must border on
+$\overline{P_i P_{i+2}}$ as well as an adjacent vertex, so it is either
+$P_i P_{i+2} P_{i+3}$ or $P_i P_{i+2} P_{i-1}$. For each subsequent triangle, there are 2 independent choices to be made, and there are $n - 4$ choices
+made in this way. There are $n$ many ways to choose the value $i$, and each
+triangulation can be done in reverse for a 2-fold symmetry. Therefore the
+total number of ways is given by
+$$\frac{n \cdot 2^{n-4}}{2} = n \cdot 2^{n - 5}$$
+
+\item
+In the group of 5-digit numbers that don't contain a 6, we can note that
+whatever the residue mod 3 of the first 4 digits, each residue mod 3 appears
+exactly 3 times among the last digits. Therefore exactly a third of them are
+divisible by 3:
+$$\frac{(10^5 - 9^5) - (10^4 - 9^4)}{3} = \frac{37512}{3} = 12504$$
+\end{enumerate}
+
+\chapter{Combinations}
+
+\begin{enumerate}[label={2.\arabic*}]
+
+\item
+Initially, ${10 \choose 5} = 252$ combinations can be selected. Finally,
+any member of the power set except the entire set and the null set can be
+selected as a combination, for a total combination count of
+$$2^{10} - {10 \choose 10} - {10 \choose 0} = 1022$$
+The difference is the answer, $1022 - 252 = 770$ additional combinations.
+
+\item
+If 6 games are played, all $2^6$ outcomes are equally likely, and only
+${6 \choose 3}$ of them involve going to a game 7. Therefore the probability
+of the Reds winning the series in game 7 is
+$$\frac{{6 \choose 3}}{2^7} = \frac{5}{32}$$
+
+N.C.: This is also a direct result of binomial probabilities, which we'll
+get to soon.
+
+For the second question, if the Reds win the series we know that they win
+the final game and 3 others before it. If the Blues win $k$ games,
+$0 \leq k \leq 3$, then $k+3$ games are played before the final game and
+can be ordered in ${k+3 \choose 3}$ many ways. The number we're looking for is
+$$\sum_{k=0}^{3} {k+3 \choose 3} = 1 + 4 + 10 + 20 = 35$$
+N.C.: This sum also falls prey to the hockey-stick identity:
+$$\sum_{k=0}^{3} {k+3 \choose 3} = {7 \choose 4} = 35$$
+$$\sum_{k=0}^{3} {k+3 \choose k} = {7 \choose 3} = 35$$
+Which suggests that there's another way to view the solution. Imagine any
+series shorter than 7 games is padded out to a length of 7 games by including
+wins for the losing team. This doesn't change the overall result, but gives
+a bijection with the set of combinations of 7 choose 4 (or 3).
+
+\item
+(a) There are ${6 \choose 2} = 15$ chords to choose from, ${6 \choose 4} = 15$
+convex quadrilaterals (each of which is uniquely described by 4 chords), and
+${15 \choose 4} = 15 \cdot 91$ choices of 4 chords. Therefore the probability is
+$$\frac{15}{15 \cdot 91} = \frac{1}{91}$$
+
+(b) This question is somewhat strangely worded, and it seems to be ambiguous
+whether line $AB$ intersects the interior of any of the 24 rectangles. Let us
+assume that it doesn't, so that there are 12 rectangles on one side of line
+$AB$ and 12 on the other. Choose one pair of rectangles that will overlap to
+color black, then choose two other non-overlapping rectangles on either side.
+Then there are
+${12 \choose 1} \cdot 2^2 \cdot {11 \choose 2} = 2640$ ways to have exactly
+one pair of black rectangles overlap. The overall probability is then
+$$\frac{2640}{{24 \choose 4}} = \frac{3 \cdot 22 \cdot 40}{23 \cdot 22 \cdot 3 \cdot 7} = \frac{40}{161}$$
+
+\item
+This happens exactly when one player gets 3 odd tiles and the other two players
+get 1 odd tile. There are $\frac{9!}{3!3!3!} = 1680$ ways of apportioning the
+tiles, and all players get an odd sum in
+$${3 \choose 1} {5 \choose 3} (2 \cdot {4 \choose 2}) = 360$$
+many ways. Therefore the total probability is
+$$\frac{360}{1680} = \frac{3}{14}$$
+
+\item
+If the probability of getting heads 1 out of 5 times is the same as getting
+heads 2 out of 5 times,
+$${5 \choose 1}p^1 (1-p)^4 = {5 \choose 2}p^2 (1-p)^3 \iff 1-p = 2p \iff p = 1/3$$
+And therefore the odds of getting heads exactly 3 out of 5 times is
+$${5 \choose 3}(\frac{1}{3})^3 (\frac{2}{3})^2 = \frac{40}{243}$$
+
+\item
+From any two vertices, you can build a square in two possible directions.
+A quick argument that I won't rewrite here for the fact that you
+can't have exactly 3 vertices in a square in the dodecagon; the fourth
+vertex is necessarily in the dodecagon as well. There are $12 / 4 = 3$ of 
+these such squares, and they are counted 4 times (overcounted 3 times) among
+all sets of two vertices. The full count is:
+$$2 \cdot {12 \choose 2} - 3 \cdot 3 = 132 - 9 = 123$$
+
+\item
+You can choose k ranks and k files on which to place the rooks, and then
+there are $k!$ many ways to rearrange them, for a total of
+$${m \choose k}{n \choose k}k! = \frac{m!n!}{(m-k)!(n-k)!k!} \text{ ways}$$
+
+\item
+A quick argument shows that the residues $(\text{mod }3)$ of each of these
+numbers are either all the same or all different.
+
+Case 1: $a \equiv b \pmod{3}$
+$$0 \equiv a + b + c \equiv 2a + c \equiv -a + c$$
+$$a \equiv b \equiv c$$
+There are $2 \cdot {11 \choose 3} + {12 \choose 3} = 550$ ways for this to occur.
+
+Case 2: $a \not\equiv b \pmod{3}$
+$$0 \equiv a + b + c \not\equiv -a + c; 0 \not\equiv -b + c$$
+$$a \not\equiv c; b \not\equiv c$$
+There are $11 \cdot 11 \cdot 12 = 1452$ ways for this to occur, giving a total
+of $550 + 1452 = 2002$ ways in which the sum of three distinct numbers from the
+set can have a sum congruent to $0 \pmod{3}$.
+
+\item
+There are $2^3=8$ possibilities for the type of complementarity, of which one
+is degenerate: 3 cards can't have the same shape, color, and shade.
+
+If all 3 qualities are different, we can construct a complementary set by
+starting with one of the 27 cards from the deck, then there are $2^3=8$
+choices of second card, with the final card being uniquely determined.
+Each of these sets can be permuted in $3!$ ways, giving a count of
+$\frac{27 \cdot 8}{3!} = 36$ total sets in this case.
+
+If two of the qualities are different, there are 3 ways to choose which of
+the qualities is the same, 3 ways to choose the value of this quality, and
+$\frac{9 \cdot 4}{3!} = 6$ ways to choose the elements of the subset (by
+analogy with the argument in the first case above). In this case there are
+a total of $3 \cdot 3 \cdot 6 = 54$ total sets.
+
+If one of the qualities is different, there are 3 ways of choosing which of
+the qualities is different, 9 ways of choosing the values of the other two
+qualities, and a unique subset, giving 27 total sets in this case.
+
+Summing these, we have $36 + 54 + 27 = 117$ complementary 3-card sets.
+
+\item
+I failed to solve this in a couple of ways, using circular counting and PIE.
+
+This method is somewhat roundabout. Line up the remaining $m-k$ beads,
+creating $m-k+1$ spaces ($m-k-1$ not including the ends).
+
+\textbf{Direct counting}: Choose $k$ of the spaces between remaining red
+marbles (not including the ends)
+in ${m-k-1 \choose k}$ many ways. Then choose one of the ends in 2 ways, and
+choose the other $k-1$ spots from the central spaces for a total of
+$${m-k-1 \choose k} + 2{m-k-1 \choose k-1} = {m-k \choose k} +
+{m-k-1 \choose k-1} \text{ ways}$$
+
+\textbf{Overcounting}: Choose $k$ of the spaces including the ends, and
+subtract out the cases when you include both ends, for a total of
+$${m-k+1 \choose k} - {m-k-1 \choose k-2} \text{ ways}$$
+
+N.C.: These can be shown to be equal through the binomial recursion or
+a difference in hockey-stick identities.
+
+\textbf{Circular counting}: I'm not as solid on this solution, but it seems
+like when you take out $k$ marbles, color them blue, and replace them, there
+are 2 cases.
+
+Case 1 (red marble in position 1): There are $m-k$ spaces to fill between
+red marbles, which can happen in ${m-k \choose k}$ many ways.
+
+Case 2 (blue marble in position 1): There are $m-k-1$ remaining spaces
+between the red marbles, and $k-1$ blue marbles to fill them, which can
+happen in ${m-k-1 \choose k-1}$ many ways. Therefore the total is:
+$${m-k \choose k} + {m-k-1 \choose k-1} \text{ ways, as in the solution
+above.}$$
+
+\item
+There are 7 spaces between red beads in any case, so the skeleton of the
+necklace is RBBRBBR...RBBR, with 9 places to insert the remaining $32-14=18$
+blue beads. Partitioning 18 into 9 groups can be done in
+${27 \choose 9} = 4686825$ many ways.
+
+\item
+First, we can notice that there are ${5 \choose 2} = 10$ lines and 
+$5 \cdot {4 \choose 2} = 30$ perpendiculars
+(perps), of which 6 will coincide at each of the 5 vertices and 3 will coincide
+at each of the ${5 \choose 3} = 10$ orthocenters.
+
+\textbf{Overcounting}: There are ${30 \choose 2} = 435$ pairs of perps, and
+this total can be reduced in 2 ways.
+
+Case 1: The perps are parallel, which happens in at least 3 ways per line,
+of which there are 10, reducing the total by 30.
+
+Case 2: The perps are coincident, which happens at each of the 5 vertices in
+6 ways, resulting in $5 \cdot ({6 \choose 2} - 1) = 70$ overcountings, as 
+well as at the 10 orthocenters, resulting in $10 \cdot ({3 \choose 2} - 1) = 20$
+overcountings.
+
+$$\text{Total intersections} = {30 \choose 2} - 3 \cdot {5 \choose 2} - 
+5 \cdot ({6 \choose 2} - 1) - 10 \cdot ({3 \choose 2} - 1) = 315$$
+
+\textbf{Constructive counting}: Consider a particular perpendicular, for
+example that from $A$ to $\overline{BC}$. Excluding the vertex $A$ and the
+orthocenter of $ABC$, each vertices $A, B, C, D$ have 5 perps which
+intersect the given perp, for a total of 20. Counting over all perps and
+adding in orthocenters and vertices, we get:
+$$\frac{30 \cdot 20}{2} + {5 \choose 3} + 5 = 315 \text{ intersections}$$
+
+\end{enumerate}
+
+\chapter{Properties of Binomial Coefficients}
+
+\begin{enumerate}[label={3.\arabic*}]
+
+\item
+$$\text{Assuming } m \leq k \leq n \text{,}$$
+$${n \choose k}{k \choose m} = {n \choose n-k;m} = {n \choose m;k-m}
+= {n \choose m}{n-m \choose k-m}$$
+
+\item
+$$(x_1 + \ldots + x_m)^n = \sum_{\substack{n_1 + \ldots + n_m = n \\ n_1, \ldots, n_m \geq 0}}
+{n \choose n_1}{n-n_1 \choose n_2}{n-n_1-n_2 \choose n_3}\cdots{n_m \choose n_m}x_1^{n_1} \cdots x_m^{n_m}$$
+
+\item
+$$\sum_{i=0}^5 {10 \choose i;i}\cdot (-2)^{10-2i} = 184756$$
+
+Alternatively, $x^2 + \frac{1}{x^2} - 2 = (\frac{(x+1)(x-1)}{x})^2$, so our desired
+coefficient is that of $x^{20}$ in $(x^2 - 1)^{20}$, that is to say it is ${20 \choose 10} = 184756$.
+
+\item
+a)
+$$\sum_{k=0}^n k^2 {n \choose k} = \sum_{k=0}^n 2{k \choose 2}{n \choose k} + {k \choose 1}{n \choose k}$$
+$$= \sum_{k=0}^n 2{n \choose 2}{n-2 \choose k-2} + {n \choose 1}{n-1 \choose k-1}$$
+$$= 2{n \choose 2}\sum_{k=0}^{n-2} {n-2 \choose k} + {n \choose 1}\sum_{k=0}^{n-1} {n-1 \choose k}$$
+$$= 2^{n-2}n(n-1) + 2^{n-1}n = 2^{n-2}n(n+1)$$
+b)
+$$\sum_{k=0}^n \frac{(-1)^k}{k+1} {n \choose k} = \sum_{k=0}^n \frac{(-1)^k}{n+1} {n+1 \choose k+1}$$
+$$= \frac{1}{n+1} \left( \sum_{k=0}^n (-1)^{k-1} {n+1 \choose k} + 1 \right) = \frac{1}{n+1}(0 + 1) = \frac{1}{n+1}$$
+
+\item
+$$\sum_{i=0}^k (-1)^i {n \choose i} = \sum_{i=0}^k (-1)^i \left({n-1 \choose i-1} + {n-1 \choose i} \right)$$
+$$= \sum_{i=0}^k (-1)^i \left({n-1 \choose i} - {n-1 \choose i} \right) + (-1)^k {n-1 \choose k}$$
+$$= (-1)^k {n-1 \choose k}$$
+
+\item
+This doesn't hold for $n=1$. If $n>1$ is odd, it has at least two 1s in its binary expression (first and last digits),
+and we refer to 3.13a to finish the proof.
+
+\item
+The number of odds is $2^{\sigma_2 (n)}$, where $\sigma_k (n)$ is the sum of the digits of $n$ in base $k$.
+
+\item
+This only makes sense when $n \geq 2$. By symmetry we can check only ${2^n \choose i}$ where
+$i < 2^{n-1}$. In these cases, $i$ written in base 2 has at least one 1 in place $k$, $k < n$. Because of this,
+the addition $(2^n - i) + i$ will have at least 2 carries, in places $n$ and $k$ (carried over to become a 1 in place $n+1$).
+By Theorem 3.4, this means ${2^n \choose i}$ is divisible by $2^2 = 4$.
+
+\item
+$${2p \choose p} = 2 {2p-1 \choose p-1} = 2 \cdot \frac{\prod_{\substack{n \in \mathbb{Z}_p^{\times}}} p + n}{\prod_{\substack{n \in \mathbb{Z}_p^{\times}}} n}$$
+$$\equiv 2 \cdot \frac{\left( \sum_{n \in \mathbb{Z}_p^{\times}} n \right)p + 1}{1} \pmod{p^2}$$
+$$\equiv 2 \cdot \left( \left( \frac{p-1}{2} \right) p^2 + 1 \right) \pmod{p^2}$$
+$$\equiv 2 \pmod{p^2}$$
+
+\item
+$$\sum_{k=0}^n k {n \choose k}^2 = \sum_{k=0}^n (n-k) {n \choose k}^2 = S$$
+$$2S = \sum_{k=0}^n n {n \choose k}^2 = n\sum_{k=0}^n {n \choose k}^2$$
+$$= n{2n \choose n} = 2n{2n-1 \choose n-1}$$
+
+And then, dividing by 2 gives $S = n{2n-1 \choose n-1}$.
+
+\item
+In the case of $n = 2m-1$, given $|S| = k$ we have an equal number of allowed elements of $S$ whether $k$
+is even or odd. In either case, once we decide on a parity we must choose $k$ elements from $m-k$, therefore we have:
+$$a_{2m-1} = 2 \sum_{k=1}^m {m-k \choose k} = 2(F_{m+1} - 1)$$
+In the case of $n = 2m$, we can consider the two cases when $k$ is even and odd.
+When $k$ is even, there is no difference between $S$
+as a subset of $\{1, \ldots, 2m\}$ and of $\{1, \ldots, 2m+1\}$, so there are $a_{2m+1}/2$ possibilities for $S$.
+Similarly when $k$ is odd, there are $a_{2m-1}/2$ possibile values of $S$. Therefore:
+$$a_{2m} = \frac{a_{2m+1} + a_{2m-1}}{2} = F_{m+2} + F_{m+1} - 2 = F_{m+3} - 2$$
+
+\end{enumerate}
+
+\chapter{Bijections}
+
+\begin{enumerate}[label={4.\arabic*}]
+
+\item
+Imagine a (1) at the beginning and a (6) at the end, then consider the differences between successive
+rolls, which will add up to 5 across all rolls including the phantom (1) and (6). There are $6^4$ total possible
+rolls, and using Theorem 4.2b, we get:
+$$\frac{{9 \choose 4}}{6^4} = \frac{63}{648}$$
+
+\item
+A bijection can be established between lucky tickets and medium tickets by changing the last 3 digits
+of a lucky number from $d$ to $9-d$. Then the sum of the digits will be 27, so the ticket will be medium.
+The function is its own inverse, turning medium tickets into lucky tickets, and therefore is a bijection between
+the sets. The sets are the same size, so $A - B = 0$.
+
+Long way:
+
+Ways the first 3 numbers can sum to n ($n < 10$) : ${n+2 \choose 2}$
+
+Ways the first 3 numbers can sum to n ($10 \leq n \leq 13$) : ${n+2 \choose 2} - 3{n-8 \choose 2}$
+
+$$ A = 2 \left( \sum_{n=0}^9 {n+2 \choose 2}^2 + \sum_{n=10}^13 \left( {n+2 \choose 2} - 3{n-8 \choose 2} \right)^2 \right) $$
+$$ A = 55252 $$
+
+$$ B = {32 \choose 5} - 6 \left( {22 \choose 5} - 3{12 \choose 5} \right) - 3{12 \choose 5} = 55252 $$
+
+\item
+For each subset of 4 points, there is only one way in which the segments can form an intersection. Conversely,
+given two segments that intersect we can extract the 4 points producing them. This forms a bijection between
+the set of intersections and the set of subsets of 4 points, which has size ${n \choose 4}$.
+
+\item
+In the surjective case, 49 of the quantities $a_{i+1} - a_i$ must be 1. There are 99 of these, and the set of
+99-tuples forms a bijection with the set of surjective functions $f : A \to B$, so the number of these functions
+is ${99 \choose 49}$.
+
+For the non-surjective case, we will adapt the solution to problem 4.1 above.
+Consider the quantities $a_{i+1} - a_i$. There are 101 of these,
+they are nonnegative, and they sum to 49. The set of these 101-tuples forms a bijection with the set of
+increasing functions $f : A \to B$. Therefore by Theorem 4.2b, the size of this set is ${149 \choose 49}$.
+
+\item
+First, establish a bijection between sets with 7 and sets without 7. Then, for each number less than 7,
+it will be represented by addition in one set and subtraction in the other. Therefore, the sum of all numbers
+other than 7 added in this way is 0. The number 7 is represented $2^6$ times, so the answer is $7 \cdot 2^6$.
+
+\item
+In binary, 2003 is represented as 11111010011. In order for $D(n) = 2$ to hold, the number must be
+of the form 11...100...011...1 in binary. If the number of binary digits of $n$ is $k$ and we impose the requirement
+$3 \leq k \leq 10$, then we can say that there are $k-1$ places for the change in digit to occur, and 2 of
+them must be chosen for a total of ${k-1 \choose 2}$ numbers with $D(n) = 2$. Summing from $k=3$ to $10$
+is easily done with the hockey stick identity for a total of ${10 \choose 3} = 120$ such numbers.
+
+Considering 11-digit binary numbers, the greatest number of this form that is less than 2003 is
+11111001111. There are 4 integers of this form with the same location for the change in the first adjacent
+digit, and otherwise there are 9 places for the digits to change, giving ${9 \choose 2} = 45$ other 11-digit
+numbers with $D(n) = 2$. Of these, anything with both digit changes in the last 6 places will be too big,
+so we overcounted by ${6 \choose 2} = 15$. Therefore the total number of these is $120 + 4 + 45 - 15 = 154$.
+
+Alternatively, follow the logic to get ${11 \choose 3} = 165$ numbers up to 11 binary digits. There are
+$1 + 4 + 3 + 2 + 1 = 11$ that have a first digit change in the first 4 possible places, making the total
+$165 - 11 = 154$.
+
+\item
+$a_{1234} = 0$ because 1234 is not expressible as the sum of powers of 3. One way to see this is by the
+expression in base 3: 1200201 contains 2s and therefore doesn't show up in the given polynomial.
+
+\item
+There are $n$ one-element subsets, and for the multi-element subsets we can establish a bijection
+between those containing their average and those not containing their average. This means that
+$T_n - n$ is divisible by 2, or in other words that it is even.
+
+\item
+Create a bijection $f(a_1, \ldots, a_k) = (1, 1, \ldots, 1, 1 + a_1, \ldots, 1 + a_k)$ where there are $n-k$ many
+ones to start the n-tuple on the RHS. This takes all partitions of $n$ to partitions of $2n$ of size $n$. For the
+inverse function, ignore all 1s in the partition of $2n$ and send each $b_l > 1$ to $b_l - 1$.
+
+\item
+Each rhombus consists of one triangle in the same orientation as the grid and one inverted. Consider the vertex
+of the inverted triangle, along with its orientation, to be the unique determiners of the rhombus. This creates a
+bijection between the number of rhombuses in a given orientation with the number of vertices in the $(n-2)$-grid,
+of which there are ${n \choose 2}$ for a total of $3{n \choose 2}$ rhombuses for the 3 possible orientations.
+
+\item
+$$\sum_{k=1}^54 6k - 2 = 8802$$
+
+Wrong solution below, needs rework:
+
+One way of looking at this is to have 3 numbers that correspond to how many vertices you move along each edge.
+Regularly-oriented triangles would have a sum of 325, while inverted triangles would have a sum of 650. Additionally,
+scalene triangles will be overcounted 5 times and equilateral triangles will be overcounted twice. This can be overcome
+by requiring that $0 < a \leq b \leq c$, where these variables correspond to side "lengths" in vertices. 
+In this case, you have 3 non-negative integers adding to $c-1: a-1, b-a, c-b$, where $0 \leq c-1 \leq 322$. Using Theorem 4.2a and
+summing using the hockey-stick identity gives:
+
+$$\sum_{c=1}^323 {c+1 \choose 2} = {325 \choose 3}$$
+
+\item
+The bijection is the binary $f(n) = (2n$ XOR $n) // 2$, where sequences containing 1100 or 0011 get mapped to sequences
+containing 010, and sequences containing 010 are only mapped to by sequences containing 1100 or 0011. The
+function takes you from a sequence of length $k + 1$ to a sequences of length $k$, and it doubly covers
+the shorter sequences, giving the result:
+$$b_{n+1} = 2a_n$$
+
+\end{enumerate}
+
+\chapter{Recursions}
+
+\begin{enumerate}[label={5.\arabic*}]
+
+\item
+(i) Each line adds a region, and each intersection adds a region. At the nth new line added, it can intersect at
+most once with each other line, for a total of $R_n = 1 + (n-1) + R_{n-1}$. Our base case is $R_0 = 1$, giving:
+$$R_n = {n+1 \choose 2} + 1$$
+
+(ii) Each new line only creates regions in the interior of intersections; that is if it intersects $(n-1)$ other lines
+it will create $(n-2)$ new closed regions. Now $r_n = (n-2) + r_{n-1}$ with base case $r_2 = 0$, giving:
+$$r_n = {n-2 \choose 2}$$
+
+\item
+Let $A_n$ be the number of n-digit integers starting with 1 and let $B_n$ be the number of n-digit integers
+not starting with 1. Then $A_n = B_{n-1}$ and $B_n = 2(A_{n-1} + B_{n-1})$. Substitution gives
+$B_n = 2(B_{n-1} + B_{n-2})$ with base cases $B_1 = 2, B_2 = 6$. Solving for the eigenvalues and using initial
+values gives:
+$$B_n = \frac{(1+\sqrt3)^{n+1} - (1 - \sqrt3)^{n+1}}{2\sqrt3}$$
+$$A_n + B_n = \frac{(2+\sqrt3)(1+\sqrt3)^n - (2 - \sqrt3)(1 - \sqrt3)^n}{2\sqrt3}$$
+
+\item
+There are ${n-k+1 \choose k}$ $k$-element skipping subsets of $\{ 1, 2, \ldots, n\}$, and therefore there are
+$\sum_{k=0}^{n} {n-k+1 \choose k} = F_{n+1}$ skipping subsets in all.
+
+Alternatively (and more appropriately), our skipping subsets can be partition based on whether or not 
+they contain $n$. If so, it cannot contain $n-1$, so removing $n$ from the subset forms a bijection with
+skipping subsets of $\{1, \ldots, n-2\}$. If not, it is a skipping subset of $\{1, \ldots, n-2\}$ and the inclusion
+forms a bijection. If we call $S_n$ the number of skipping subsets of a list of size $n$, we arrive at the
+recursion $S_n = S_{n-1} + S_{n-2}$, and since $S_0 = F_1 = 1, S_1 = F_2 = 2$ we have $S_n = F_{n+1}$.
+
+Alternative approach to Example 3.8:
+
+Base case is already established, that $f_0 = F_1, f_1 = F_2$. Then by inspection of Pascal's triangle, it can
+be seen that each element on the shallow diagonal is preceded by two elements on the two preceding
+shallow diagonals. It follows that $f_{n+2} = f_{n+1} + f_n$ and therefore that $f_n = F_{n+1}$ generally.
+
+\item
+Thinking about the middle of the game, you will at some point move the biggest disk from its original
+peg to a new peg. In this case, the new peg must be empty, and the original peg will then be empty,
+meaning that the other $n-1$ disks are all on the third peg, and therefore in the correct order. This
+means that you have solved exactly the $(n-1)^{\text{th}}$ Tower of Hanoi game up to this point. By
+the same logic, you will solve the $(n-1)^{\text{th}}$ game again to put all the disks back onto the
+largest disk. If we call the number of moves to solve the $n^{\text{th}}$ game $H_n$, this gives us the
+recursion $H_n = 2H_{n-1}+1$. The base case $H_1 = 1$ propagates out to the solution $H_n = 2^n - 1$.
+
+\item
+As we know from Problem 5.3, there are $F_{11} = 144$ ways for heads not to occur on consecutive
+tosses, therefore the probability is $P = \frac{144}{2^{10}} = \frac{9}{64}$.
+
+\item
+If we call $P(n, k)$ the probability of making $k$ baskets in $n$ attempts, we have the following recursion
+from Bayes': $P(n, k) = P(n-1, k-1)\frac{k-1}{n-1} + P(n-1, k)\frac{n-k-1}{n-1}$. Ignoring the probabilities on
+the RHS, the fractions add to $\frac{n-2}{n-1}$, suggesting how the steady state can evolve. We clearly have
+a steady state for low $n, k$: $P(3, 1) = P(3, 2) = \frac{1}{2}, P(4, 1) = P(4, 2) = P(4, 3) = \frac{1}{3}$, and
+assuming that $P(n, k) = \frac{1}{n-1}$ for all $k$ (base case already established), we get:
+
+$$P(n+1, k) = \frac{k-1}{n(n-1)} + \frac{n-k}{n(n-1)} = \frac{1}{n}$$
+
+Therefore $P(100, 50) = \frac{1}{99}$.
+
+\item
+I actually get different values for these two, both in their recursion and in their closed forms. For example,
+when $n=3$ we have every permutation except for $(3 \;\; 2 \;\; 1)$ belonging to $A$, but both permutations
+beginning with $2$ are not in $B$, so $|A_3| = 5 \neq 4 = |B_3|$.
+
+For $A_n$, permutations are in this if, when read from left to right, the numbers decrease at most once. There
+is only one permutation for which the numbers decrease 0 times, so we will treat this as a unique case. For the
+other $|A_n| - 1$ many of them, there are two places we can place $(n+1)$ such that the property still holds, and
+they are just left of the decrease or at the right end. These are two different spots here, so this case represents
+$2|A_n| - 2$ permutations in $A_{n+1}$. For the unique case of the monotonically increasing permutation, the
+new value can be placed anywhere, in $n+1$ ways, to form a member of $A_{n+1}$. Therefore we have:
+
+$$|A_{n+1}| = 2|A_n| + n - 1$$
+
+Using the base case $A_1 = 1$ and quickly checking a linear combination of a linear polynomial and an exponential,
+we get $A_n = 2^n - n$ as the general non-recursive formula.
+
+If the ``or'' is meant to be an \emph{exclusive}
+or, the permutations belonging to $A$ can't start with 1, which changes the situation. In this case, each $a \in A$
+starts with an increasing sequence, followed by 1 and then the rest of the numbers in increasing order. The
+number of ways it is possible to have an increasing nonempty subset of $\{2, \ldots, n\}$ is $2^{n-1} - 1$, so in
+this case we have ${A'}_n = 2^{n-1} - 1$.
+
+The recursion is similar to the case above, except that the monotonic
+increasing case doesn't exist here, so we have simply ${A'}_{n+1} = 2{A'}_{n} + 1$, where the ``+1'' term comes
+from the permutation $((n+1) \;\; 1 \;\; 2 \;\; \ldots \;\; n)$.
+
+For $B_n$, consider the leftmost end. If it is not 1 or $n$, call it $i$. Both $i+1$ or $i-1$ will appear to the right,
+and they each only have one possible value which must be to its right, up to $n$ and down to 1. One of these two
+sequences may terminate on the right-hand side of the permutation, but that leaves the other sequence to end
+with $2 \ldots 1 \ldots$ or $n-1 \ldots n \ldots$, a contradiction to its membership in $B_n$. If 1 or $n$ is chosen,
+the rest of the sequence is a member of $B_{n-1}$, so we have the recursion:
+
+$$|B_{n+1}| = 2|B_n|$$
+
+Using the base case $B_1 = 1$ gives $B_n = 2^{n-1}$ as the general non-recursive formula.
+
+Finishing the logic in Example 5.8, the ``good'' permutations of $\{ n, n-1, \ldots, n-k+1\}$ are identical to the
+``good'' permutations of $\{ k, k-1, \ldots, 1\}$ represented in $B_k$, which has size $2^{n-1}$. As $k$ can be
+any positive integer up to $n$, we have $b_n = \sum_{k=1}^n 2^{k-1} = 2^n - 2$.
+
+\item
+This is the recursion behind the subfactorial function, also known as the problem of derangements.
+The idea is to permute n objects such that no object ends where it started. To see that this is satisfied
+by the recursion, consider the $(n+1)^{\text{th}}$ object and the $n$ cases where it ends up in position
+$i, 1 \leq i \leq n$. Then if object $i$ ends up in position $n+1$, this reduces to a derangement of $n-1$
+objects. If not, there are $n$ objects going to $n$ places, none of them remaining still -- this is a
+derangement of $n$ objects. Therefore $D_{n+1} = n(D_n + D_{n-1})$.
+
+Based on the given base
+cases: $D_1 = !1 = 0, D_2 = !2 = 1$, we can conclude that $D_n = !n = \left[\frac{n!}{e}\right]$ (one of my
+favorite formulas!).
+
+\item
+Call the number of $n$-letter ARMLovian words that start with a vowel $V_n$ and those that start
+with a consonant $C_n$.
+
+Case 1a: Starts with vowel + consonant + vowel. In this case, removing the first vowel turns it into a
+$(n-1)$-digit word, so there are $C_{n-1}$ of these.
+
+Case 1b: Starts with vowel + consonant + consonant + vowel. In this case, removing the first two
+vowels forms a bijection with a set with size $C_{n-2}$.
+
+Case 1c: Starts with vowel + vowel. In this case, removing the first vowel makes it an word of length
+$n-1$ starting with a vowel, of which there are $V_{n-1}$.
+
+Overall from Case 1 we get $V_n = V_{n-1} + C_{n-1} + C_{n-2}$.
+
+Case 2: Starts with a consonant. In this case, removing that consonant gives a word starting with
+a vowel: $C_n = 3V_{n-1}$.
+
+Combining these gives $V_n = V_{n-1} + 3V_{n-2} + 3V_{n-3}$, with the same relation existing for $C_n$. This is
+an easy recurrence to calculate 7 times, and I'm too lazy to do a 3x3 eigenvalue decomposition with a 3-equation
+system. Base cases $C_1 = 0, C_2 = 3, C_3 = 12$ give $C_n = \{ 21, 66, 165, 426, 1119 \}$
+for $n = \{4, 5, 6, 7, 8\}$:
+
+$$V_7 + C_7 = 373 + 426 = 799$$
+
+Alternatively you could use the same recursion for the total number of words $W_n: W_1 = 1, W_2 = 7, W_3 = 19$
+to calculate out to $W_7 = 799$.
+
+\item
+From the same argument as the previous problem, $S_n = S_{n-1} + S_{n-3} + S_{n-4}$. The base case is:
+$S_1 = 1, S_2 = 1, S_3 = 2, S_4 = 4$. Computing out the next few values gives 6, 9, 15, 25, 40, 64, 104, 169,
+273, 441, 714, 1156.
+
+From this we see that $S_{2k} = F_k^2$ for $k \leq 5$, from which we get
+$$S_{4k+1} = \sum_{i=1}^{k} S_{2i} + 1 = F_{2k}F_{2k+1}$$
+$$S_{4k+3} = \sum_{i=2}^{k+1} S_{2i} + 2 = F_{2k+1}F_{2k+2}$$
+
+Generally, $S_{2k+1} = F_{k}F_{k+1}$
+
+Which in turn, implies:
+$$S_{2k+2} = F_{k}F_{k+1} + F_{k}F_{k-1} + F_{k-1}^2$$
+$$=F_{k}F_{k+1} + F_{k-1}(F_{k} + F_{k-1})$$
+$$=F_{k}F_{k+1} + F_{k+1}F_{k-1}$$
+$$=F_{k+1}(F_k + F_{k-1})$$
+$$=F_{k+1}^2$$
+
+And by induction, we have proved these relations for all k, and we are finished.
+
+\item
+Let $a_n$ denote the number of such colorings whose right end is not colored completely red, and $b_n$
+the number of colorings whose right end is completely red. For the first set, there are 3 ways to color the right
+end -- RB, BR, BB -- so we establish the recursion:
+
+$$a_{n+1} = 3(a_n + b_n)$$
+$$b_{n+1} = a_n$$
+
+Combining these, we are armed with the recursion $a_{n+1} = 3(a_n + a_{n-1})$, and because $\{b_n\}$ is
+equal to an index-shifted $\{a_n\}$, it also satisfies the recursion, as does any linear combination of the two.
+In particular, $c_n = a_n + b_n$ also satisfies this recursion. It is easy to establish the base case of $c_0 = 1, c_1 = 4$.
+Then, using the notation $3^t || n$ to mean that the prime factorization of $n$ contains $3^t$ (and $3^{t+1}$
+doesn't divide $n$), we can conjecture that $3^k || c_{2k}, c_{2k+1}$ for all $k$.
+
+With the base case established, assume it is true for all $k < 2n$. Then
+$$3^{n-1} || (c_{2n-1} + c_{2n-2})$$
+$$3^n || 3(c_{2n-1} + c_{2n-2}) = c_{2n}$$
+
+From which we can deduce by the same logic that $3^k || c_{2n+1}$ and finish our strong induction. We have
+proved that $3^{1000}$ is the greatest power of 3 that divides $c_{2001}$.
+
+\item
+Exeter is an easier case, where there are ${n \choose r}$ ways to choose the girls and the boys, then there
+are $r!$ ways to pair them together, for a total of $E(n, r) = {n \choose r}^2 r! = {n \choose r}\frac{n!}{(n-r)!}$
+possibilities. This is the chapter on recursions, so we should establish both in case one is easier to compute
+for Lincoln than another:
+
+$$E(n+1, r) = \left(\frac{n+1}{n+1-r} \right)^2 E(n, r); \text{ base case: } E(r, r) = r!$$
+$$E(n, r+1) = \frac{(n-r)^2}{r+1} E(n, r); \text{ base case: } E(n, 1) = n^2$$
+
+In Lincoln, $g_1$ can only choose $b_1$, then $g_2$ has 2 choices, and in general $g_k$ has $k$ choices if
+all of the previous girls have already chosen. As the choices are independent, we can multiply them together
+to reach the same first base case: $L(r, r) = \prod_{k=1}^r k = r!$. Alternatively, if only one girl is making a choice,
+then $g_k$ has $2k-1$ choices, and we get the same second base case: $L(n, 1) = \sum_{k=1}^n 2k-1 = n^2$.
+
+If $r$ girls have already made their choice, then there are 2 cases when another girl makes her choice. Choosing
+$g_n$ allows you to choose for her last, giving $(2n - 1 - r)L(n, r)$ possibilities. Not choosing $g_n$ is
+equivalent to a choice in $L(n-1, r+1)$, so we have:
+
+\begin{align}
+L(n, r+1) = (2n-1-r)L(n-1, r) + L(n-1, r+1)
+\end{align}
+$$=(2n-1-r)L(n-1, r) + (2n-3-r)L(n-2, r) + L(n-2, r+1)$$
+$$=\sum_{k=1}^n (2n - 2k + 1 - r)L(n-k, r)$$
+
+At this point, rather than trying to manipulate this recursion to get a simpler closed form, we can just check
+if $E(n, r)$ satisfies the recurrence (5.0.1):
+
+\begin{align*}
+& (2n-1-r)E(n-1, r) + E(n-1, r+1) \\
+& =(2n-1-r)\frac{((n-1)!)^2}{r!((n-1-r)!)^2} + \frac{((n-1)!)^2}{(r+1)!((n-2-r)!)^2} \\
+& =\frac{((n-1)!)^2}{r!((n-2-r)!)^2}\left(\frac{2n-1-r}{(n-1-r)^2} + \frac{1}{r+1}\right) \\
+& =\frac{((n-1)!)^2}{r!((n-2-r)!)^2}\left(\frac{2nr + 2n - r^2 - 2r - 1 + n^2 - 2nr - 2n + r^2 + 2r + 1}{(r+1)(n-1-r)^2} \right) \\
+& =\frac{((n-1)!)^2}{r!((n-2-r)!)^2}\left(\frac{n^2}{(r+1)(n-1-r)^2} \right) \\
+& =\frac{(n!)^2}{(r+1)!((n-1-r)!)^2} \\
+& =E(n, r+1) \text{, as desired.}
+\end{align*}
+
+As both $E(n, r)$ and $L(n, r)$ satisfy the same base case and same recursion, they must be equal.
+
+\end{enumerate}
+
+\chapter{Inclusion and Exclusion}
+
+\begin{enumerate}[label={6.\arabic*}]
+
+\item
+\begin{align*}
+& |A_3 \cap A_4 \cap \overline{A_5}| = 2001 - (|A_3| + |A_4| + |\overline{A_5}|) + (|A_{12}| + \left\lfloor\frac{4}{5}(|A_3| + |A_4|)\right\rfloor) \\
+& = 2001 - 667 - 500 - 1601 + 166 + 533 + 400 = 332
+\end{align*}
+
+\item
+Let $S_r, S_g, S_b$ denote the sets of arrangements in which red, green, and blue marbles respectively
+are all together. Then by PIE, we have:
+
+\begin{align*}
+& |\overline{S_r} \cap \overline{S_g} \cap \overline{S_b}| = |S| - |S_r| - |S_g| - |S_b| + |\overline{S_r} \cap \overline{S_g}| + |\overline{S_g} \cap \overline{S_b}| + |\overline{S_b} \cap \overline{S_r}| \\
+& = {12 \choose 3;4;5} - {10 \choose 1;4;5} - {9 \choose 1;3;5} - {8 \choose 1;3;4} + {7 \choose 1;1;5} + {6 \choose 1;1;4} + {5 \choose 1;1;3} \\
+& = 27720 - 1260 - 504 - 280 + 42 + 30 + 20 = 25768
+\end{align*}
+
+\item
+From PIE, we can compute these directly. For $O_n$ -- the number of permutations of
+$\{1, 2, \ldots, n\}$ with exactly one fixed point -- we have:
+
+\begin{align*}
+& O_n = n!\sum_{k=1}^n \frac{(-1)^{k-1}}{(k-1)!} \\
+& = n!\sum_{k=0}^{n-1}\frac{(-1)^k}{k!} \\
+& = n!\sum_{k=0}^{n}\frac{(-1)^k}{k!} - (-1)^n\\
+& = D_n - (-1)^n \text{, as desired.}
+\end{align*}
+
+Instead, if we use a bijection, we can observe that any permutation fixing exactly 1 point is a
+derangement of the other $n-1$ points, so we have:
+
+\begin{align*}
+& O_n = nD_{n-1} \\
+& = n!\sum_{i=0}^{n-1}\frac{(-1)^i}{i!}
+\end{align*}
+
+And the proof finishes as the equation above.
+
+\item
+There are ${2n \choose 2} = n(2n-1) \geq n^2 + n > n^2 + 1$ many segments to choose from, and there
+are ${2n \choose 3} = \frac{2n(2n-1)(n-1)}{3}$ many possible triangles to form. We will prove the statement
+by induction on $n$. The base case of $n=2$ features 4 points and 6 segments, of which you are choosing 5.
+WLOG let $\overline{P_1 P_2}$ be the segment that is not chosen; then $\Delta P_1 P_3 P_4, \; \Delta P_2 P_3 P_4$
+are both triangles formed by the chosen segments.
+
+Next, we assume the statement is true for $n=k$ and examine the case of $n=k+1$. Notice that any point forms
+at most $k$ segments with other points, and therefore removing one point, as well as all its attached segments,
+would still leave at least $k^2 + k + 2 \geq k^2 + 1$ segments among $k$ points. From here, we apply the induction
+to show the existence of a triangle in the case of $n=k+1$.
+
+\item
+This is equivalent to Theorem 6.1 and the commutative and associative properties of addition.
+
+\item
+Possibly needs some work to put in terms of the totient function, since that seems sufficient to solve the
+problem (though I haven't figured out how).
+
+Any factor $f$ of $n^2$ smaller than $n$ can be paired with a factor larger than $n$: $f \cdot \frac{n^2}{f} = n^2$,
+therefore half of one less than the number of factors of $n^2$ are less than $n$. Writing the prime factorization
+$n = \prod_{i=1}^k p_i^{n_i}$, we have $n^2 = \prod p_i^{2n_i}$. There are
+
+$$ \prod (n_i + 1) - 1 = \sum_{j=1}^k \sigma_j \text{ factors of $n$ less than $n$,}$$
+
+where $\sigma_j = \sum_{1 \leq n_{i_1} < \ldots < n_{i_j} \leq k} \prod_{\ell = 0}^j n_{i_{\ell}}$ is the $j^{\text{th}}$
+cyclic sum. Similarly, there are
+
+$$ \frac{ \prod (2n_i + 1) - 1}{2} = \sum_{j=1}^k 2^{j-1}\sigma_j \text{ factors of $n^2$ less than $n$.}$$
+
+Taking the difference, we get $\sum_{j=2}^k (2^{j-1}-1)\sigma_j$ divisors of $n^2$ that are less than $n$ and
+do not divide $n$.
+
+\item
+We're first going to calculate the least common multiple of 3 numbers. We can use the
+well-established base case of
+
+\begin{align*}
+& [a, b] = \frac{ab}{(a, b)}
+\end{align*}
+
+Continuing, we have:
+
+\begin{align*}
+& [a, b, c] = [[a, b], [b, c]] \\
+& = \frac{[a, b][b, c]}{([a, b], [b, c])} \\
+& = \frac{ \left( \frac{(ab^2c)}{(a, b)(b, c)}\right) }{\left( \frac{b(a, c)}{(a, b, c)} \right)} \\
+& = \frac{a b c (a, b, c)}{(a, b)(b, c)(c, a)} \text{. Rearranging this gives} \\
+& \frac{[a, b, c]}{(a, b, c)} = \frac{abc}{(a, b)(b, c)(c, a)}
+\end{align*}
+
+Squaring both sides, we get:
+
+\begin{align*}
+& \frac{[a, b, c]^2}{(a, b, c)^2} = \frac{a^2 b^2 c^2}{(a, b)^2 (b, c)^2 (c, a)^2} \\
+& = \frac{\left( \frac{ab}{(a, b)} \right) \left( \frac{bc}{(b, c)} \right) \left( \frac{ca}{(c, a)} \right) }{(a, b)(b, c)(c, a)}\\
+& = \frac{[a, b][b, c][c, a]}{(a, b)(b, c)(c, a)} \text{, as desired.}
+\end{align*}
+
+\item
+We'll start by creating a bijection. The inequality $|a| + |b| \leq |c|$ is the triangle inequality, so instead of distributing
+tickets we'll be building triangles with integer side lengths $a, b, c$ and perimiter $a+b+c = 61$. Because 61 is odd,
+there are no degenerate triangles with $a=0$ or $a + b = c$.
+
+This is the chapter on PIE, so while this can be solved with direct counting and recursion, we'll use the formula
+
+$$|A \cap B \cap C| = |A \cup B \cup C| - |A| - |B| - |C| + |A \cap B| + |B \cap C| + |C \cap A|$$
+
+$A$ is the number of ways we can distribute 61 tickets to the 3 dorms, given that we distribute between 1 and 30
+to the first dorm. $B$ and $C$ are defined similarly for the second and third dorms, respectively. By the Pigeonhole
+Principle, one of the sides must be between 1 and 30, except in the 3 cases where two sides are zero. This allows us
+to calculate $|A \cup B \cup C|$ as the number of ways to sum 3 nonnegative integers to 61, minus 3. From there,
+$A$ occurs when the first term is not zero or above 30; complementary counting gives the $|A|, |B|, |C|$ terms.
+Similarly, $A \cap B$ occurs when all 3 side are positive, except for when $a > 30$ or $b > 30$, which
+can't happen simultaneously. Therefore we have:
+
+\begin{align*}
+& |A \cap B \cap C| = ({63 \choose 2} - 3) - 3({63 \choose 2} - {62 \choose 1} - {32 \choose 2}) + 3({60 \choose 2} - 2{30 \choose 2}) \\
+& = 1950 - 4185 + 2700 = 465 \text{ ways to distribute the tickets.}
+\end{align*}
+
+Checking our answer with direct counting, given $a$ we have $c = 61 - a - b \leq 30 \iff b \geq 31 - a$, so we can pick
+$b$ to be anything between $(31-a)$ and 30, inclusive. This gives us $a$ choices, and so we have:
+
+$$ \sum_{a=1}^{30} a = 465 \text{, as expected.}$$
+
+\item
+For the purposes of PIE, let's first calculate how many ways 3 sets can satisfy both properties. If $A, B \subseteq C$
+and $A \subseteq B, C$, then $A \subseteq B \subseteq C$. Given $A$ has $a$ elements (and $b, c$ are defined
+similarly), there are ${n \choose c}$ many subset choices for $C$, ${c \choose b}$ many subset choices
+for $B$, and ${b \choose a}$ subset choices for $A$ for a total of:
+
+\begin{align*}
+& \sum_{0 \leq a \leq b \leq c \leq n} {n \choose a;b;c} = \sum_{0 \leq a \leq b \leq c \leq n} {n \choose c}{c \choose b}{b \choose a} \\
+& = \sum_{0 \leq b \leq c \leq n}{n \choose c}{c \choose b}\sum_{a=0}^b {b \choose a} \\
+& = \sum_{c=0}^n{n \choose c}\sum_{b=0}^c{c \choose b}2^b \\
+& = \sum_{c=0}^n{n \choose c}3^c = 4^n \text{ ways to have } A \subseteq B \subseteq C \subseteq \{1, 2, \ldots, n \}
+\end{align*}
+
+Compare this to the number of ways to choose $A, B, C \subseteq \{1, 2, \ldots, n \}$, which is $(2^n)^3 = 8^n$.
+
+Given a $c$-element set $C$, there are $2^c$ ways to choose a subset, and therefore $4^c$ ways to choose 2 subsets.
+Summing, we get: $\sum_{c=0}^n 4^c = \frac{4^{n+1} - 1}{3}$.
+
+We create a bijection from this case to the case where one of the sets is a subset of the other two, because
+\begin{align*}
+A \subseteq B, C \iff \overline{B}, \overline{C} \subseteq \overline{A}
+\end{align*}
+
+Therefore the total number of ways in which this can be achieved \emph{inclusively} (that is, $A \subseteq B \subseteq C$
+is allowed) is:
+
+\begin{align*}
+& |A_1 \cup A_2| = |A_1| + |A_2| - |A_1 \cap A_2| \\
+& = \frac{2(4^{n+1} - 1)}{3} - 4^n = \frac{5\cdot 4^n - 2}{3}
+\end{align*}
+
+\emph{Exclusively}, this would be $\frac{2(4^n-1)}{3}$ instead.
+
+\item
+Of interest, we can establish a bijection $f : \mathcal{P}(S)^k \to \mathcal{P}(S)^k$ by \\ 
+$f(S_1, S_2, \ldots, S_k) = (\overline{S_1}, \overline{S_2}, \ldots, \overline{S_k})$, with proof of bijectivity from \\
+$f = f^{-1}$. Then $$\cap S_i = \emptyset \iff \cup \overline{S_i} = S$$
+
+This isn't necessary, but provides some motivation; it's clearer to see that $\cup \overline{S_i} = S$ if and only if for each
+$s \in S$ there is some $j, \;1 \leq j \leq k$ such that $s \in \overline{S_j} \iff s \not\in S_j$. There are $2^k - 1$ ways to
+choose membership of $s$ in order to satisfy this, and all choices of $|S|$ values of $s$ are independent, so we can
+multiply the possibilities to get $(2^k - 1)^{|S|}$ ways in all.
+
+\item
+The analogy to PIE here is that lcm $\to \cup$, gcd $\to \cap$, $+ \to \times$, $- \to \div$, and so
+
+\begin{align*}
+[a_1, \ldots, a_n] \geq \frac{a_1a_2\cdots a_n}{\prod_{1 \leq i < j \leq n}(a_i, a_j)} \to |\cup A_i| \geq \sum|A_i| - \sum|A_i \cap A_j|
+\end{align*}
+
+This is one of the Bonferroni inequalities and has been established earlier in the chapter. To see more explicitly why
+this is true, consider a prime factor $p$ of $[a_1, \ldots, a_n]$, and WLOG let it appear $k$ times as a factor of the
+$\{ a_i \}$. Then it will appear once on the LHS and $k - {k \choose 2} = \frac{3k - k^2}{2} \leq 1$ times on the RHS,
+with equality only if $k=1, 2$.
+
+\item
+WLOG let $x_2 > x_1$, and let $\Delta_{1,2} = 1 - \frac{x_1}{x_2} \in (0, 1)$. Clearly if $\Delta_{1,2}$ is rational, we can write
+$px_1 = qx_2$ so that $\lfloor npx_1 \rfloor = \lfloor nqx_2 \rfloor$ for all $n \in \mathbb{Z}_+$, and
+$|S(x_1) \cap S(x_2)|$ is not finite. Assume then that $|S(x_1) \cap S(x_2)|$ is finite, so that $\Delta_{1,2}$ is
+irrational and $\exists N : \lfloor nx_1 \rfloor \neq \lfloor kx_2 \rfloor \;\; \forall k \in \mathbb{Z}_+, n > N$.
+Choose an approximant $p/q$ from the continued fraction representation of $\Delta_{1,2}$ such that
+$q > N\cdot \frac{p}{q} \Delta_{1,2}$, then $qx_1$ and $(q-p)x_2$ differ by a tiny amount, meaning their floors
+will almost certainly be equal, contradicting the assumption. \\
+
+N.B. 3 real numbers wasn't necessary here, nor was the condition that $\frac{1}{x_1} + \frac{1}{x_2} + \frac{1}{x_3} > 1$.
+
+\end{enumerate}
+
+\chapter{Calculating in Two Ways: Fubini's Principle}
+
+\begin{enumerate}[label={7.\arabic*}]
+
+\item
+(a) This is obviously a mistake, and I believe it was meant to say ``five-digit numbers'', in which case the final digit must
+be 5. The other digits can be rearranged in any way, in a total of $4! = 24$ ways. The digits sum to 20, and each digit is
+used 6 times in each place, for a total sum of $$20\cdot 6 \cdot 11110 + 24\cdot 5 = 1599960$$
+
+(b)
+
+\begin{align*}
+& \prod_{i=1}^{59} (24^{\frac{1}{i+1} + \ldots + \frac{1}{60}})^i = \prod_{i=1}^{59} 24^{\frac{i}{i+1} + \ldots + \frac{i}{60}} \\
+& = \prod_{i=1}^{59} \prod_{j=i+1}^{60} 24^{\frac{i}{j}} \\
+& = \prod_{j=2}^{60} \prod_{i=1}^{j-1} 24^{\frac{i}{j}} \text{ (Fubini's Principle)} \\
+& = \prod_{j=2}^{60} (24^{\frac{1}{j}})^{\sum_{i=1}^{j-1} i} \\
+& = \prod_{j=2}^{60} (24^{\frac{j-1}{2}}) \\
+& = 24^{\sum_{j=2}^{60} \frac{j-1}{2}} = 24^{885} = 2^{2655}\cdot 3^{885} \\ \\
+& 2655 + 885 = 3540 \text{, our final answer.}
+\end{align*}
+
+\item
+Let S be the set of ordered pairs $(i, s)$, where $i$ is the student number between 1 and 60 and $s$ is any positive
+integer less than or equal to the student's
+AIME score. Then $a_i = |S(i, *)|$ and $b_s = |S(*, i)|$, so the statement we are asked to prove is Fubini's Principle,
+already proven in the chapter:
+
+$$\sum |S(i, *)| = \sum |S(*, s)|$$
+
+\item
+If we define $t$ as the total number of triangular faces and $p$ as the total number of pentagonal faces, we have
+$t = VT/3, p = VP/5$ and therefore $t + p = V\left( \frac{T}{3} + \frac{P}{5} \right) = 32 \iff V(5T + 3P) = 480$. 
+Counting edges, we have $\frac{V(T + P)}{2}$ in total. Then from Euler's Formula, we can count in a different way to
+get
+
+$$F - E + V = 2 \iff \frac{V(T + P)}{2} = 30 + V \iff V(T + P - 2) = 60$$
+
+Finally, in order to make a corner we must have
+
+$$108P + 60T < 360 \implies (T, P) \in \{ (1, 2), (2, 1), (2, 2), (3, 2) \}$$
+
+Checking these with the two equations, the only
+solution is $V=30, T=P=2$, giving $200 + 20 + 30 = 250$ as the final answer.
+
+\item
+Count the number of committees in 2 ways, first as a choice of senators: ${30 \choose 3}$. Next, let the number
+of all-enemy committees be E, and all-friend committees be F. We can construct the number of 2-enemy-pair
+committees by choosing a senator and choosing two enemies, though this triply counts the all-enemy committees :
+$30{6 \choose 2}-3E$. Similarly, 1-enemy-committees are $30{23 \choose 2} - 3F$, and adding we get
+
+\begin{align*}
+& {30 \choose 3} = E + (30{6 \choose 2}-3E) + 30{23 \choose 2} - 3F + F \\
+& E + F = \frac{30\left( {6 \choose 2} + {23 \choose 2} \right) - {30 \choose 3}}{2} \\
+& = 15(15 + 253) - 2030 = 1990
+\end{align*}
+
+Alternative 1: Complementary counting.
+Count the number of mixed committees by choosing a senator, choosing one of their friends and one enemy.
+There is one other senator in the committee who has both a friend and an enemy, so this double counts.
+Then we have:
+
+$$E + F = {30 \choose 3} - \frac{30\cdot 23 \cdot 6}{2} = 1990$$
+
+\item
+First, let's find $\sum_{\pi \in S_n} |k - \pi(k)|$ for a fixed $k$. There are $(n-1)!$ permutations that take $k$ to $l$,
+for any $l \in \{ 1, 2, \ldots, n \}$. Therefore
+
+\begin{align*}
+& \sum_{\pi \in S_n} |k - \pi(k)| = (n-1)!\left( (k-1) + (k-2) + \ldots + 1 + 0 + 1 + \ldots + (n-k) \right) \\
+& = (n-1)!\left( {k \choose 2} + {n - k  +1 \choose 2} \right)
+\end{align*}
+
+Now we can use Fubini's Principle to calculate:
+
+\begin{align*}
+& \sum_{\pi \in S_n} f(\pi) = \sum_{\pi \in S_n} \sum_{k=1}^n |k - \pi(k)| \\
+& = \sum_{k=1}^n \sum_{\pi \in S_n} |k - \pi(k)| \\
+& = \sum_{k=1}^n (n-1)!\left( {k \choose 2} + {n - k  +1 \choose 2} \right) \\
+& = (n-1)! \left( {n+1 \choose 3} + {n+1 \choose 3} \right) \\
+& = \frac{2(n+1)n(n-1)(n-1)!}{3\cdot 2} = \frac{(n-1)(n+1)!}{3}
+\end{align*}
+
+\item
+If every subset already has at least 3 elements, then with 3 elements in each subset there are already
+$7{3 \choose 2} = 21$ pairs in the subsets. There are ${7 \choose 2} = 21$ pairs overall, so these subsets
+are maximal. Clearly two subsets may not share more than one element, so we will prove that they may
+not be disjoint either. To establish a contradiction, WLOG let $M = \{ 1, 2, 3, 4, 5, 6, 7 \}; \; A_1 = \{ 1, 2, 3 \}; \;
+A_2 = \{ 4, 5, 6 \}$. Then $A_3, \ldots, A_7$ must all include one element from $A_1$, one element from $A_2$, and 7;
+otherwise they will include a pair from either $A_1$ or $A_2$. However, from the Pigeonhole Principle there are
+3 elements to take from either of these sets, and 5 sets which do so, meaning that there will be a pair of subsets
+in $\{ A_3, \ldots, A_7 \}$ that contain the same pair of elements. This is a contradiction, so two subsets cannot
+be disjoint and therefore must share exactly one element.
+
+\item
+I don't understand how Fubini's Principle applies here, but this seems like a nice induction. In the combinatorial
+model of having $k$ red balls and $n-k$ blue balls, there are ${k \choose 2}$ ways of picking two red balls,
+$k(n-k)$ ways of picking one of each kind, and ${n-k \choose 2}$ ways of picking two blue balls. This gives us
+the identity ${n \choose 2} = k(n-k) + {k \choose 2} + {n-k \choose 2}$.
+
+The hypothesis is that $f(n) = {n \choose 2}$, and this is true for the base case $f(1) = 0$, or $f(2) = 1$ if you're
+more comfortable with that. Under the strong inductive hypothesis that $f(k) = {k \choose 2}$ for all $k < n$,
+we have $f(n) = k(n-k) + {k \choose 2} + {n-k \choose 2} = {n \choose 2}$ and the proof is complete.
+
+\item
+Direct method: Let $S = \{ \left( (s_i, s_j), p_k \right) : s_i \text{ or } s_j \text{ correctly solved } p_k \}$.
+For a given $p_k$, at most 80 students failed to solve it, so $|S(*, p_k)| \geq {200 \choose 2} - {80 \choose 2}$, and
+
+\begin{align*}
+& \sum_{1 \leq i < j \leq 200} |S \left( (s_i, s_j), * \right)| = \sum_{k=1}^6 |S(*, p_k)| \\
+& \geq 6\left( {200 \choose 2} - {80 \choose 2} \right) = 6{200 \choose 2} - 18960
+\end{align*}
+
+To achieve a contradiction, assume that $|S\left( (s_i, s_j), * \right)| \leq 5$ for all $i, j$. Then:
+
+\begin{align*}
+\sum_{1 \leq i < j \leq 200} |S \left( (s_i, s_j), * \right)| \leq 5{200 \choose 2} = 6{200 \choose 2} - 19900
+\end{align*}
+
+In short, $\sum |S| \leq 6{200 \choose 2} - 19900 < 6{200 \choose 2} - 18960 \leq \sum |S|$, a contradiction.
+Therefore there must be one pair that
+solved every problem correctly.
+
+Alternative: If any participant scores 5 or 6, it is clear that they can be paired with someone in order to have
+solved all of the problems. If no participant scores a 5 or a 6, at least $120\cdot 6 - 200 \cdot 3 = 120$ participants
+must have scored a 4. Take one of them, say $s_i$ and let
+
+$$I = \{ (s_j, p_k ) : s_j \text{ correctly solved } p_k \text{, where } p_k \text{ was not correctly solved by } s_i \}$$
+$$\sum_{j \neq i} |I(s_j, *)| = \sum_{k=1}^6 |I(*, p_k)| \geq 2 \cdot 120 = 240$$
+
+By the Pigeonhole Principle, at least one of the 199 other students -- say $s_j$ -- must have $|I(s_j, *)| = 2$, and
+then we know that $(s_i, s_j)$ is a pair that correctly solved all 6 problems.
+
+\item
+Each teacher must spend at least one hour giving their presentation and 10 hours watching the other teachers'
+presentations. This makes the minimum possible time 11 hours, and if we have only teacher present at a time,
+this gives us the minimal 11-hour conference.
+
+\item
+A particular row contains $\frac{100 \cdot 75}{2} = 3750$ pairs of differing color, so there are 375000 of these
+row pairs in all rows. There are ${100 \choose 2} = 4950$ pairs of columns, and by $375000 = 4950\cdot75 + 3750$
+there are at least 3750 pairs of columns containing at least 76 pairs of differing color in a row. Choose one of these
+column pairs, and limit the grid to $76 \times 2$ differing row color pairs in these two columns. By the problem
+assumptions, there are at most 25 of each color in each of the two grid columns. Due to this, and $76 = 100 - 24$,
+each color must appear at least $25 - 24 = 1$ time in each column of the grid.
+
+Suppose, in order to achieve a contradiction, that there are not 4 points making a rectangle in this grid such that
+all 4 points are different colors. Because each color must appear at least once in the columns, the row pairs must
+all belong to one of the following sets: $\{ (r, g), (r, b), (r, y) \}, \{ (r, g), (g, b), (g, y) \}, \{ (r, b), (g, b), (b, y) \}, \{ (r, y), (g, y), (b, y) \}$.
+Each of these sets contains a color that appears in each pair; therefore there is a color which appears in all 76
+rows of the grid. By the Pigeonhole Principle, these 76 points sorted into 2 columns means there is a column with
+at least 38 points of the same color, a contradiction to the requirement that no color appears more than 25 times
+in any column.
+
+N.B. You always have at least 73 4-color groups show up in a given grid, e.g. 25 pairs of (r, g), 24 of (r, b), 25 of (g, b), 1 of (r, y),
+and 2 of (g, y). 
+In addition, there is no overlap between the different column pairs, so this actually proves the existence of at least
+$3750 \cdot 73 = 273750$ such 4-color rectangles.
+
+\item
+There are ${b \choose 2} = b \cdot \frac{b-1}{2}$ pairs of judges in all. Let $S = \{ c, (j_1, j_2) : c \text{ is a contestant and }
+j_1, j_2 \text{ are a pair of judges that agree on } c \}$. Before we proceed on counting $|S|$ in two ways, let's examine
+how we can bound $|S(c, *)|$. If a contestant receives $n$ passes and $b-n$ fails, there are $n(b-n)$ pairs of judges in
+disagreement. This is minimized when $n = \frac{b \pm 1}{2}$, when $n(b-n) = \frac{b^2 - 1}{4}$, and therefore at
+least $\frac{b^2 - b}{2} - \frac{b^2 - 1}{4} = \frac{b^2 - 2b + 1}{4} = \left( \frac{b-1}{2} \right)^2$ pairs of judges agree.
+
+\begin{align*}
+a\left(\frac{b-1}{2}\right)^2 \leq \sum |S(*, (j_1, & \, j_2))| = \sum|S(c, *)| \leq \frac{b(b-1)}{2}k \\
+bk & \geq \frac{a(b-1)}{2} \\
+\frac{k}{a} & \geq \frac{b-1}{2b} \text{, and we are done.}
+\end{align*}
+
+\item
+We'll set up a correspondance between these two types of partitions and
+prove that it's a bijection.
+
+First, for any partition $\mathcal{P}$ of $n : \mathcal{P} = \sum_{k=1}^n p_k \cdot k$ we can define the doubling function:
+
+\begin{align*}
+f(\mathcal{P}) & = \sum_{k=1}^n \left( \sum_{i=1}^{\lceil \log_2(p_k) \rceil} 2^i d_i \right) k \\
+& = \sum_{k=1}^n \sum_{i=1}^{\lceil \log_2(p_k) \rceil} d_i (2^i k)
+\end{align*}
+
+Here $d_{k_i}$ is the $i^{\text{th}}$ digit in the binary representation of $p_k$. Clearly the inner sum in the first line
+must be equal to $p_n$, and so this is another partition of $n$ using addition of $(2^i k)$ rather than $k$.
+Let the metric $m(\mathcal{P})$ be the smallest $k$ for which $p_k > 1$
+(i.e. the smallest repeated number in the partition). Then $m(f(\mathcal{P})) \geq m(\mathcal{P})$, with equality if
+and only if $f(\mathcal{P}) = \mathcal{P}$. As there are only finitely many partitions of $n$ for any given $n$, it is
+clear that repeatedly applying $f$ will eventually lead to the ``maximal'' (by the standards of $m$) partition
+$\mathcal{P}'$. The process of repeatedly applying $f$ until reaching a fixed point will be denoted by the
+function $F(\mathcal{P}) = P'$.
+
+The only fixed points of the binary representation function $p \to \sum 2^i d_i$ are 0 and 1. Therefore if $\mathcal{P}$
+is a fixed point of $f$, it must be the case that $p_k \in \{0, 1\} \forall k$; that is, $\mathcal{P}$ is a distinct partition.
+This implies that $F(\mathcal{P})$ is a distinct partition.
+
+Using a different observation about positive integers, we can write any $k = 2^{a_k}o_k$, where $o_k$ is an
+odd positive integer and $a_k$ is a nonnegative integer. Now we define the halving function $G$:
+
+\begin{align*}
+G(\mathcal{P}) & = \sum_{k=1}^n p_k (2^{a_k}o_k) \\
+& = \sum_{k=1}^n (2^{a_k}p_k)o_k
+\end{align*}
+
+Again, the parenthetical quantity in the first line is equal to $k$, so this is another partition of $n$. As the sum
+of only odd numbers, $G(\mathcal{P})$ is an odd partition. When $F$ is restricted to acting only on odd partitions
+and $G$ is restricted to only distinct partitions, we claim that $G = F^{-1}$. This is actually easiest to do if you start
+with even more atomic $f$ and $g$ doubling and halving functions with $g = f^{-1}$; trying to prove this with
+sequences of functions is harder. That said, I've already spent quite a while on this proof so I'm going to leave that
+as an exercise for later.
+
+Once the bijection is established, we are done.
+
+\end{enumerate}
+
+\chapter{Generating Functions}
+
+\begin{enumerate}[label={8.\arabic*}]
+
+\item
+(a) The parity of $i$ and $n$ must be the same, so 0 if $i \neq n \pmod{2}$. Otherwise, $i$ steps are taken to the
+right, and an equal number $(n-i)/2$ of steps are taken to the right and left in addition. The answer in this case is
+${n \choose \frac{n-i}{2}} = {n \choose \frac{n+i}{2}}$.
+
+Generating function interpretation: coefficient of $x^i$ in
+
+$$(x^1 + x^{-1})^n = \frac{(1 + x^2)^n}{x^n} = \sum_{k=0}^n {n \choose k} x^{2k-n}$$
+$$2k-n = i \iff k = \frac{n+1}{2}$$
+$$\text{The desired coefficient is then } {n \choose \frac{n+i}{2}} = {n \choose \frac{n-i}{2}}$$
+
+(b) Looking for the coefficient of $x^i$ in
+
+\begin{align*}
+(x^1 + 1 + x^{-1})^n & = \frac{(1 + x + x^2)^n}{x^n} \\
+& = \frac{((1+x)^2 - x)^n}{x^n} \\
+& = \sum_{k=0}^n (-1)^k {n \choose k} (1+x)^{2k}x^{-k} \\
+& = \sum_{k=0}^n (-1)^k {n \choose k} \sum_{\ell=0}^{2k} {2k \choose \ell}x^{\ell-k}
+\end{align*}
+
+Now $\ell-k = i \iff \ell = k + i$, so our coefficient is:
+
+$$c_i = {n \choose i}_2 = \sum_{k=0}^n (-1)^k {n \choose k}{2k \choose k+i}$$
+
+Alternatively we can decompose this many other ways, resulting in many expressions for the trinomial coefficients.
+
+(c) This is easier, since $(x + 2 + x^{-1})^n = (\sqrt{x} + \sqrt{x^{-1}})^{2n}$, and we are seeking the coefficient of
+$x^i = \sqrt{x}^{2i}$:
+
+$$\left(\sqrt{x} + \frac{1}{\sqrt{x}}\right)^{2n} = \sum_{k=0}^{2n} {2n \choose k}x^{k/2 - (2n-k)/2} = \sum_{k=0}^{2n} {2n \choose k}x^{k - n}$$
+
+Now $k - n = i \iff k = n+i$, so our coefficient is ${2n \choose n+i}$.
+
+\item
+The LHS is obvious and comes from the definition of the generating function for $(1+x)^{m+n}$. For the RHS,
+apply Proposition 8.1 to get
+
+\begin{align*}
+[x^k]\left( (1+x)^m (1+x)^n \right) & = \sum_{i=0}^k \left( [x^i](1+x)^m \right) \left( [x^{k-i}](1+x)^n \right) \\
+& = \sum_{i=0}^k {m \choose i}{n \choose k-i}
+\end{align*}
+
+\item
+\begin{align*}
+(x+x^2 + \ldots + x^6)^6 & = x^6(1 + x^3)^6(1 + x + x^2)^6 \\
+[x^{21}](x+x^2+\ldots + x^6)^6 & = [x^{15}](1+x^3)^6(1 + x + x^2)^6 \\
+& = \sum_{k=1}^5 {6 \choose k}{6 \choose 9-3k}_2 \\
+& = \sum_{k=1}^5 {6 \choose k}\sum_{i=0}^6 (-1)^i {6 \choose i}{2i \choose 9-3k+i} \\
+& = {6 \choose 1}\cdot 1 + {6 \choose 2}\cdot 50 + {6 \choose 3}\cdot141 \\
+& \;\;\;\;\;\;\;\;\;\; + {6 \choose 4}\cdot 50 + {6 \choose 5}\cdot 1 \\
+& = 4332
+\end{align*}
+
+\item
+In each case, every run of tosses is equally likely and Claudia \& Andrea toss the same number of coins as
+Adrian \& Zachary, so we just need to show there are the same number of ways for these events to occur.
+
+(i)
+\begin{align*}
+& \sum_{n=0}^{2004} ([x^n](1+x)^{2004})([x^{n+1}](1+x)^{2004}) \\
+= & \sum_{n=0}^{2004} ([x^n](1+x)^{2004})([x^{2004-n-1}](1+x)^{2004}) \\
+= & [x^{2003}](1+x)^{4008} \\
+= & {4008 \choose 2003} = {4008 \choose 2005}
+\end{align*}
+
+(ii) 
+\begin{align*}
+& \sum_{n=0}^{2003} ([x^n](1+x)^{2003})([x^n](1+x)^{2005}) \\
+= & \sum_{n=0}^{2003} ([x^n](1+x)^{2003})([x^{2005-n}](1+x)^{2005}) \\
+= & \sum_{n=0}^{2003} {2003 \choose n}{2005 \choose 2005-n} \\
+= & {4008 \choose 2005} = {4008 \choose 2003} \text{ (Vandermonde Identity)}
+\end{align*}
+
+Both probabilities are given by the binomial $\frac{{4008 \choose 2003}}{2^{4008}}$.
+
+N.B. We also could have treated (ii) like (i), but I wanted to demonstrate both ways of calculation.
+
+\item
+\begin{align*}
+& {n \choose 0}^2 - {n \choose 1}^2 + \ldots + (-1)^n {n \choose n}^2 \\
+= & \sum_{k=0}^n (-1)^k {n \choose k}^2 \\
+= & \sum_{k=0}^n (-1)^k {n \choose k}{n \choose n-k} \\
+= & \sum_{k=0}^n a_k b_{n-k} \text{, for }a_k = [x^k](1-x)^n, b_k = [x^k](1+x)^n \\
+= & [x^n](1-x)^n(1+x)^n \\
+= & [x^n](1-x^2)^n
+\end{align*}
+
+Which is 0 if $n$ is odd, and if $n$ is even we can write $n = 2m$ to express this quantity as $(-1)^m {2m \choose m}$.
+
+\item
+Consider the sum of a subset of $T$ as a single term with coefficient 1 in the generating function
+
+$$ g(x) = \prod_{k=1}^p (1 + x^k) $$
+
+If $p$ divides the sum of the subset, then it divides the $k$ value of the term, or in other words, $k \equiv 0 \pmod{p}$.
+We want to add up the coefficients of all such $k$ (including the constant term / empty set!), and we can do so in a
+similar manner to Examples 8.11 and 8.12 (I'm assuming, haven't read that one yet):
+
+\begin{align*}
+\sum_{j \equiv 0 \pmod{p}} c_j & = \frac{1}{p}\sum_{j=1}^p g(e^{\frac{2\pi i j}{p}}) \\
+& = \frac{1}{p}\sum_{j=1}^p\prod_{k=1}^p (1+e^{\frac{2\pi i jk}{p}}) \\
+& = \frac{1}{p}\left[\left(\sum_{j=1}^{p-1}\prod_{k=1}^p (1+e^{\frac{2\pi i jk}{p}})\right) + 2^p\right] \\
+& = \frac{1}{p}\left[\left(\sum_{j=1}^{p-1} 2\right) + 2^p\right] \\
+& = \frac{2^p + 2p - 2}{p}
+\end{align*}
+
+\item
+(a) Let's try to factor the generating function for the result, similar to Example 8.7:
+
+\begin{align*}
+g(x) & = x^2 + x^3 + x^4 + x^5 + x^6 + x^7 + x^8 + x^9 + x^{10} + x^{11} + x^{12} + x^{13} \\
+& = x^2(1 + x + x^2 + x^3 + x^4 + x^5)(1 + x^6) \\
+& = x^2(1+ x + x^2)(1 + x^3)(1 + x^6) \\
+& = x^2(1 + x + x^2 + x^6 + x^7 + x^8)(1 + x^3) \\
+& = x^2(1+x + x^2)(1 + x)(1 - x + x^2)(1 + x^2)(1 - x^2 + x^4)
+\end{align*}
+
+The second and fourth lines can be rewritten into the product of two generating functions, one for each die roll
+of a 6-sided die:
+
+\begin{align*}
+& x^2(1 + x + x^2 + x^3 + x^4 + x^5)(1 + x^6) \\
+= \;\; & \frac{1}{3}(x^1 + x^2 + x^3 + x^4 + x^5 + x^6)(x^1 + x^1 + x^1 + x^7 + x^7 + x^7)\;\;\;\text{(\#1)} \\
+= \;\; & \frac{1}{3}(x^1 + x^2 + x^3 + x^7 + x^8 + x^9)(x^1 + x^1 + x^1 + x^4 + x^4 + x^4)\;\;\;\text{(\#2)}
+\end{align*}
+
+Generating function \#1 corresponds to having one normal 6-sided die, and another where 3 of the faces have a 1
+and the other 3 faces have a 7. Function \#2 corresponds to a die containing the numbers \{1, 2, 3, 7, 8, 9\} and
+another where 1 is written on 3 sides and 4 is written on the other 3 sides.
+
+If we are allowed atypical die, we can also rewrite this generating function to use a 6-sided die with numbers \{1, 1, 2, 2, 3, 3\}
+as well as a tetrahedral die with numbers \{1, 4, 7, 10\}.
+
+(b)
+\begin{align*}
+\sum_{k=2}^{12} \frac{1}{11}x^k = & \left(\sum_{k=1}^6 c_k x^k\right)^2 \\
+= & \sum_{k=2}^{12}\left(\sum_{n=1}^6 c_kc_{k-n}\right)x^k
+\end{align*}
+
+And this is enough to see it is impossible. For the $k=2, 12$ case we must have $c_1 = c_6 = \frac{1}{\sqrt{11}}$, and by
+symmetry we have $c_k = c_{n-k}$ in general. Then the $k=7$ case gives a contradiction:
+
+$$\frac{1}{11} = \sum_{n=1}^3 c_n^2 = \frac{1}{11} + c_2^2 + c_3^2 > \frac{1}{11}$$
+
+Therefore the identical magical dice can't sum to produce a uniform distribution on \{2, 3, \ldots, 12\}.
+
+N.B. The magical dice don't even have to be identical. Dividing both sides of the original equation by $x^2$ gives:
+
+$$\sum_{k=0}^{10} \frac{1}{11}x^k = \sum_{k=0}^{10} \left(\sum_{n=0}^5 a_nb_{k-n}\right)x^k = g_1(x)g_2(x)$$
+
+Where the generating function coefficients of $x^k$ correspond to the number $k+1$ on the die face. By the logic above,
+we must have $a_5b_5 = \frac{1}{11}$ for the case where the die sum to 12. However, the polynomial on the left has no
+real roots (roots are $\{e^{\frac{2\pi i k}{11}}\}_{k=1}^{10}$, the primitive $11^{\text{th}}$ roots of unity) and so
+$g_1$ and $g_2$ may not have real roots either. Therefore they must have even degree, meaning $a_5 = b_5 = 0$,
+a contradiction. There can be no two magical dice that sum to produce a uniform distribution of these 11 numbers.
+
+\item
+The appearance of the generalized pentagonal numbers hearkens back to Example 4.14 and the result on increasing
+partitions of $n$. For now, we will ignore the case that $n$ is a generalized pentagonal number.
+
+In that example, if we call $d_{\mathcal{P}}$ the number of consecutive largest elements of $\mathcal{P}$
+(i.e. if $a = (1, 3, 7, 8, 9), \; d_a = 3$ for (7, 8, 9)), this example established
+a bijection between $A_1$, the subset in which the smallest element of $\mathcal{P}$ was at most $d_{\mathcal{P}}$,
+and $A_1'$, the complement of this subset. In this solution the smallest element is distributed among the largest,
+reducing the length of the partition by 1.
+
+Taking the conjugate of these Ferrers (Young) diagrams, this turns increasing partitions into distinct partitions and gives a
+one-to-one correspondence between distinct partitions of even length and those of odd length. If we call the action of the
+previous bijection on the conjugate diagrams $b$, then for any partition $\mathcal{P}$ we know that $\mathcal{P}$
+and $b(\mathcal{P})$ have lengths that differ by 1, and therefore have different even/odd parity.
+This implies there are an equal number of even-length distinct
+partitions and odd-length distinct partitions, and $[x^n]f(x) = 0, n \neq \frac{3k^2 \pm k}{2}$.
+
+Taking on the case where the element in $A_1$ has no image, we have one element unaccounted for,
+corresponding to $n = \sum_{m=k}^{2k-1} m = \frac{3k^2 - k}{2}, k \in \mathbb{N}$.
+This has length $k$, and therefore contributes to our generating function with a coefficient of $(-1)^k$.
+
+In the case where an element in $A_1'$ has no preimage, this corresponds to
+$n = \sum_{m=k+1}^{2k} m = \frac{3k^2 + k}{2}, k \in \mathbb{N}$. Similarly, this has length $k$ and therefore
+contributes $(-1)^k$ to the coefficient of $x^n$ in our generating function.
+
+The proof is done, but I think it's worth mentioning that $\frac{3(-k)^2 - (-k)}{2} = \frac{3k^2 + k}{2}$, that is that
+we can consider all integer values (including negatives) of $k$ instead of using the $\pm$ sign.
+
+\item
+Using the generating function of the Legendre polynomials
+
+$$\sum_{n \geq 0} P_n(y)t^n = \frac{1}{\sqrt{1-2yt+t^2}}$$
+
+and the known fact
+
+$$P_n(y) = \left[ \frac{y-1}{2} \right]^n \sum_{k=0}^n {n \choose k}^2 \left[ \frac{y+1}{y-1} \right]^k$$
+
+We can substitute $y = -\frac{x^2 + 1}{2x}$ to get
+
+$$P_n\left( -\frac{x^2 + 1}{2x} \right) 
+= (-1)^n\frac{(1+x)^2n}{4^nx^n}\sum_{k=0}^n {n \choose k}^2 \left[ \frac{(1-x)^2}{(1+x)^2} \right]^k$$
+
+It follows that we can represent our function as
+
+\begin{align*}
+& \sum_{k=0}^n {n \choose k}^2 (1+x)^{2n-2k}(1-x)^{2k} \\
+= & (-1)^n4^nx^nP_n\left(-\frac{x^2+1}{2x}\right) \\
+= & (-1)^n4^nx^n[t^n]\frac{1}{\sqrt{1 + ((x^2 + 1)/x)t + t^2}} \\
+= & [t^n]\frac{1}{\sqrt{1 - 4(x^2 + 1)t + 16x^2t^2}} \\
+= & [t^n]\frac{1}{\sqrt{1-4t}}\frac{1}{\sqrt{1-4x^2t}}
+\end{align*}
+
+Observing that we must have $\ell = 2r$ for the coefficient to not be identically zero, we continue with
+
+\begin{align*}
+& [x^{2r}][t^n]\frac{1}{\sqrt{1-4t}}\frac{1}{\sqrt{1-4x^2t}} \\
+= & [x^r][t^n]\frac{1}{\sqrt{1-4t}}\frac{1}{\sqrt{1-4xt}} \\
+= & [x^r]\sum_{k=0}^n {2k \choose k}{2n-2k \choose n-k}x^k \\
+= & {2r \choose r}{2n-2r \choose n-r}
+\end{align*}
+
+Failed first attempt below:
+
+\begin{align*}
+& [x^{2r}][y^n]\left((y+1+x^2)^2 - 4x^2 \right)^n \\
+= & [x^{2r}]\sum_{k=0}^n {2n-2k \choose k; n-2k} (-4)^{k}x^{2k}(1+x^2)^{n-2k} \;\text{(Multinomial Expansion)} \\
+= & [x^{r}]\sum_{k=0}^n (-4)^k {n \choose k}{2n-2k \choose n}x^k(1+x)^{n-2k} \;\text{($x^2 \to x$ substitution)} \\
+= & \sum_{k=0}^r (-4)^k{n \choose k}{2n-2k \choose n}{n-2k \choose r-k} \text{, unclear where to go from here.}
+\end{align*}
+
+\item
+Looking at Example 8.9 for reference, we see that we can obtain all nonnegative integers with the given property
+using the generating function $f(x) = \prod_{k \geq 0}(1+x^{4^k})$, as it has the property:
+
+\begin{align*}
+f(x)f(x^2) & = \prod_{k \geq 0}(1+x^{4^k})(1 + x^{2\cdot4^k}) \\
+& = \prod_{k \geq 0}\frac{1-x^{4^{k+1}}}{1-x^{4^k}}\text{, which telescopes to:} \\
+& = \lim_{n \to \infty} \frac{1 - x^n}{1-x} \\
+& = x^0 + x^1 + x^2 + \ldots \text{, as desired.}
+\end{align*}
+
+The key observation to adapt this to all integers is $1 - x^{-k} = \frac{x^k - 1}{x^k}$. We cannot make every
+exponent negative (this would effectively generate all nonpositive integers instead), but we can make every
+\emph{other} exponent negative with $g(x) = \prod_{k \geq 0}(1+x^{(-4)^k})$:
+
+\begin{align*}
+g(x)g(x^2) & = \prod_{k \geq 0}(1+x^{(-4)^k})(1 + x^{2\cdot(-4)^k}) \\
+& = \prod_{k \geq 0}\frac{1-x^{4^{k+1}}}{1-x^{4^k}}\text{, which telescopes to:} \\
+& = \lim_{n \to \infty} \frac{1 - x^{16^n}}{x^{\frac{4(16^n - 1)}{5}}(1-x)} \\
+& = \lim_{n \to \infty} \frac{1}{x^n (1-x)} \\
+& = \ldots + x^{-2} + x^{-1} + x^0 + x^1 + x^2 + \ldots \text{, as desired.}
+\end{align*}
+
+We have proved that such an $X$ exists, and from our generating function it is all integers which have a
+representation in base -4 of only ones and zeros.
+
+There must be a combinatorial argument for this as well, and it would be nice to include because the 
+generating function algebra was neither clean nor obvious.
+
+\item
+Let us number these vertices $\{0, \ldots, n-1\}$ and consider the coloring of the vertices as the splitting
+of a generating function:
+
+\begin{align*}
+f(x) & = x^0 + x^1 + \ldots + x^{n-1} = \sum_{k=0}^{n-1}x^k \\
+& = f_1(x) + f_2(x) + \ldots + f_\ell(x) \text{, where} \\
+f_1(x) & = \left(x^{s_1} + x^{s_1 + d_1} + x{s_1 + 2d_1} + \ldots + x^{s_1 + \left(\frac{n}{d_1} - 1\right)}\right) \\
+& = x^{s_1}\sum_{i=0}^{\frac{n}{d_1}-1} x^{d_1 i} \\
+& \text{with } s_1 < d_1 ; \; d_1 | n ; \; \text{and all }f_i\text{ are defined similarly.}
+\end{align*}
+
+Let us write $n_i = n/d_i$ to keep track of the number of vertices in each regular polygon.
+In order to achieve a contradiction, assume that the $n_i$ are all distinct, and order
+the functions so that $n_1 < n_2 < \ldots < m_\ell$. Then we can consider $f(x^{n_1})$, which satisfies:
+
+\begin{align*}
+f_i(x^{m})|_{x = e^{\frac{2\pi i}{n}}} = 0 \text{ if } m \not| n_i \text{; else }n_ie^{\frac{2\pi i s_i m}{n}} \\
+\end{align*}
+
+Therefore $f(x^{n_1}) = 0$, because $n_1 < n$, and $f_i(x^{n_1}) = 0$ for all $i > 1$ for the same reason.
+However, this gives:
+
+\begin{align*}
+0 & = f(x^{n_1}) = f_1(x^{n_1}) + \sum_{i=2}^\ell f_i(x^{n_1}) \\
+& = n_1e^{\frac{2\pi i s_1 n_1}{n}} + 0 \text{, a contradiction.}
+\end{align*}
+
+\item
+It must be the case that the author means
+
+$$B_{n+1} = (A_n \cup B_n) \setminus (A_n \cap B_n)$$
+
+Other interpretations of this recursion make no sense. If we observe the behavior of the recurrence,
+we can write a relation for the generating function of $B_n$ with:
+
+$$f_1 (x) = f_2(x) = 1; \; f_{n+2}(x) = f_{n+1}(x) + xf_n(x)$$
+
+Moreover, we must interpret the coefficients $\pmod{2}$. By setting \\
+$g(x, t) = \sum_{n=1}^{\infty}f_n(x)t^n$, we can write
+
+\begin{align*}
+& g(x, t) - t - t^2 = (t + xt^2)g(x, t) - t^2 \\
+& g(x, t)(1-t-xt^2) = t \\
+& g(x, t) = \frac{t}{1-t-xt^2} \\
+& \;\;\;\;\;\;\;\;\;\; = \sum_{n=0}^{\infty} \frac{(1+\sqrt{1+4x})^n - (1-\sqrt{1+4x})^n}{2^n \sqrt{1-4x}}t^n \\
+& \;\;\;\;\;\;\;\;\;\; = \sum_{n=0}^{\infty} \left(2^{1-n} \sum_{k=0}^{\lfloor \frac{n-1}{2}\rfloor} {n \choose 2k+1}(1+4x)^k \right)t^n
+\end{align*}
+
+If we could substitute $n = 2^m$ and find that $2 | [x^k][t^{2^m}]g(x, t)$ for all $k$, then we would have proved that
+$B_{2^m} = \{0\}$ for all $m$ (after a short induction that $0 \in B_n \;\; \forall n$).
+
+\end{enumerate}
+
+\chapter{Review Exercises}
+
+\begin{enumerate}[label={9.\arabic*}]
+
+\item
+You can see the outside of one half, that is, $11^3 - 10^3 = 331$ unit cubes at most.
+
+Alternatively, you can use PIE on the 3 visible faces. There are $11^2$ cubes per face, 11 cubes per edge (common
+to 2 faces), and one corner (common to all 3 faces), so the total is $3\cdot11^2-3\cdot11+1 = 331$ visible unit cubes.
+
+\item
+Any two adjacent evens or odds will have a sum divisible by 2, and the sums divisible by 3 but not by 2 are
+$1+2=3$ and $3+6 = 4+5=9$, so 1 and 2 / 4 and 5 / 3 and 6 must not be adjacent to each other. This is the
+\emph{probl\`eme des m\'enages} from Chapter 6, with evens/odds instead of men and women,
+and the pairs \{(1, 2), (3, 6), (4, 5)\} instead of couples. From the solution there, we have:
+
+\begin{align*}
+M_3 & = 2\cdot3!(3! - \frac{6}{5}{5 \choose 1}2! + \frac{6}{4}{4 \choose 2}1! - \frac{6}{3}{3 \choose 3}0!) \\
+& = 12(6-12+9-2) = 12
+\end{align*}
+
+Alternatively, we can count cases. The symmetry is such that we can count arrangements starting with 1 and then
+multiply by 6.
+
+Case 1: Start with (1, 4). Then we must continue with (1, 4, 3, 2, 5, 6).
+
+Case 2: Start with (1, 6). This is the previous case in reverse.
+
+Therefore there are $6 \cdot 2 = 12$ total arrangements.
+
+\item
+\begin{align*}
+n & = \lfloor \frac{2003}{5} \rfloor + \lfloor \frac{2003}{5^2} \rfloor + \lfloor \frac{2003}{5^3} \rfloor + \lfloor \frac{2003}{5^4} \rfloor \\
+& = 400 + 80 + 16 + 3 = 499
+\end{align*}
+
+\item
+Direct counting or case counting with bijection both work here.
+
+DC: the two digit number $\overline{ad}$ ``contains'' $\overline{ad}$ many numbers (00 to $\overline{a(d-1)}$), so we have
+
+$$ \sum_{n=10}^99 n = 50\cdot99 - 5\cdot9 = 4950 - 45 = 4905 \text{ containing numbers.}$$
+
+CCwB: Among the $9000$ 4-digit numbers, there are 3 cases.
+
+Case 1: $\overline{bc} < 10$. In this case, $\overline{ad}$ ``contains'' $\overline{bc}$ no matter what. There are 900 of these.
+
+Case 2: $\overline{ad} \neq \overline{bc}$. In this case, we can establish a bijection by switching
+$\overline{ad}$ and $\overline{bc}$. Half of these numbers will be ``contained''.
+
+Case 3: $\overline{ad} = \overline{bc}$. There are 90 possible values for $\overline{ad}$, so there are 90 in this case. This gives
+
+$$900 + \frac{1}{2}(9000 - 900 - 90) = 4905 \text{ containing numbers, as before.}$$
+
+\item
+There are 3 ways you can start the word, and then at each new letter there are 2 ways to continue the word.
+Therefore the answer is $3\cdot 2^6 = 192$ seven-letter good words.
+
+\item
+For an $i \times j$ sub-chessboard, there are $m-i+1$ places for the rows to fit and $n-j+1$ places for the columns
+to fit. Then, assuming we don't care about black/white parity, square size, or anything other than rectangularity,
+we have:
+
+\begin{align*}
+& \sum_{i=1}^m \sum_{j=1}^n (m-i+1)(n-j+1) = \frac{m(m-1)n(n-1)}{4}
+\end{align*}
+
+as the number of sub-chessboards, including the original.
+
+\item
+$${10 \choose 5} = 252 \text{ times}$$
+
+\item
+$q + r$ is divisible by 11 if and only if $n$ is. $10008 = 11 \cdot 912$ is the smallest 5-digit multiple of 11, and
+$99990 = 11 \cdot 9090$ is the largest, so there are $9090 - 912 + 1 = 8179$ such values of $n$.
+
+\item
+To get to the bottom, you must go through either $A_{10}$ or $A_{11}$. The graph is symmetrical, so let's
+count the ways to get to $A_{10}$. You can come through $A_5$ in ${2 \choose 0} = 1$ way, through $A_6$ in
+${3 \choose 1} = 3$ ways, and through $A_7$ in ${4 \choose 2} = 6$ ways, for a total of 10 ways. This makes
+$10^2 = 100$ ways to get to $A_{20}$ through $A_{10}$, and double this for coming through $A_{11}$ to get
+a total of 200 ways for Mr. Fat to travel from $A_1$ to $A_{20}$ moving downward with each step.
+
+\item
+There are $9{4 \choose 2} + {2 \choose 2} = 56$ possible pair draws remaining out of ${38 \choose 2} = 703$ possible
+draws of 2 cards. Therefore the probability is $\frac{56}{703}$.
+
+\item
+$$F_n \text{ ways}$$
+
+\item
+PIE helps here.
+
+\item
+The answer will either be 5 or 0 (if it isn't possible to have $n!$ end in 2003 zeros). In any case, we have $n$ is nearly
+$2003 \cdot 5 = 10015 \in (5^5, 5^6)$. Referring back to Problem 9.3, we have
+
+$$2003 = \lfloor \frac{n}{5} \rfloor + \lfloor \frac{n}{5^2} \rfloor + \lfloor \frac{n}{5^3} \rfloor + \lfloor \frac{n}{5^4} \rfloor + \lfloor \frac{n}{5^5} \rfloor = f(n)$$
+$$f(10000) = 2000 + 400 + 80 + 16 + 3 = 2499$$
+$$f(7600) = 1520 + 304 + 60 + 12 + 2 = 1898$$
+$$f(8100) = 1620 + 324 + 64 + 12 + 2 = 2022$$
+$$f(8025) = 1605 + 321 + 64 + 12 + 2 = 2004$$
+$$f(8020) = 1604 + 320 + 64 + 12 + 2 = 2002$$
+
+And we see that there are no values of $n$ for which $f(n) = 2003$, and therefore there are 0 solutions.
+
+\item
+There is almost certainly a cleverer way of doing this (it's reminiscent of the late Chapter 3 examples), but
+here's a brute force method:
+
+\begin{align*}
+\frac{{n \choose k+1}}{{n \choose k}} & = \frac{n-k}{k+1} = \frac{4}{3} \iff 3n-7k=4 \\
+\frac{{n \choose k+2}}{{n \choose k+1}} & = \frac{n-k-1}{k+2} = \frac{5}{4} \iff 4n-9k=14 \\
+\begin{bmatrix} n \\ k \end{bmatrix} & = \begin{bmatrix} 3 & -7 \\ 4 & -9 \end{bmatrix}^{-1} \begin{bmatrix} 4 \\ 14 \end{bmatrix} \\
+& =  \begin{bmatrix} -9 & 7 \\ -4 & 3 \end{bmatrix} \begin{bmatrix} 4 \\ 14 \end{bmatrix} = \begin{bmatrix} 62 \\ 26 \end{bmatrix}
+\end{align*}
+
+We get $n=62$ from solving this linear system.
+
+\item
+$$2\sum_{k=0}^{5} {6 \choose k} + 1 = 2(2^6 - 1) + 1 = 2^7 - 1 = 127 \text{ paths}$$
+
+\item
+\begin{align*}
+& \;\;\;\;\; \sum_{i=0}^n {n \choose i} \sum_{j=i}^n {n \choose j} \\
+& = \sum_{0 \leq i \leq j \leq n} {n \choose i}{n \choose j} \\
+& = \frac{1}{2}\left(\sum_{0 \leq i, j \leq n} {n \choose i}{n \choose j} + \sum_{k=0}^n {n \choose k}^2 \right) \\
+& = \frac{1}{2}\left((2^n)^2 + {2n \choose n}\right) \\
+& = \frac{4^n + {2n \choose n}}{2} \\
+\end{align*}
+
+Or alternatively:
+
+\begin{align*}
+& \;\;\;\;\; \sum_{i=0}^n {n \choose i} \sum_{j=i}^n {n \choose j} \\
+& = \sum_{i=0}^n \sum_{j=0}^i {n \choose i} {n \choose j} \\
+& = \sum_{i=0}^n \sum_{j=0}^i {n \choose i} {n \choose i-j} \\
+& = \sum_{i=0}^n {2n \choose i} \\
+& = \frac{1}{2}\left( \left[\sum_{i=0}^{2n} {2n \choose i}\right] + {2n \choose n} \right) \\
+& = \frac{4^n + {2n \choose n}}{2}
+\end{align*}
+
+\item
+The basic answer is that if $n$ is even there are (many!) good arrays, and if $n$ is odd there are not. My solution
+is more of an invariant-style than combinatorial, and I should rethink this to come up with a combinatorial argument.
+
+The invariant in this case is the congruency class of the sum of products $\pmod{4}$. Consider changing a single
+element (it doesn't matter whether you change from 1 to -1 or the other way around, in either case the effect
+is flipping the sign), which changes the sign of both the row and the column that element contains. This has the
+effect of changing the row sum by 2 and the column sum by 2, meaning that the total change in the sum is in
+$\{-4, 0, 4\} \equiv 0 \pmod{4}$.
+
+By this invariant, we can show that all sums are equivalent to $2n \pmod{4}$, because the sum of the
+products of a matrix where all entries are 1 is $2n$. If $n$ is even, then $2n \equiv 0 \pmod{4}$ and it is possible
+for a good array to exist (e.g. changing the first $\frac{n}{2}$ elements along the main diagonal to be negative).
+If $n$ is odd, then $2n \equiv 2 \not\equiv 0 \pmod{4}$, and a good array cannot exist.
+
+\item
+If $k=1$, we can define a bijection between the partitions making up $p(n, m, 1)$ and $p(n-1, m-1)$ by removing
+a single 1 from the partition.
+
+If $k > 1$, we can define a similar bijection by removing 1 from every element to get $p(n, m, k) = p(n-m, m, k-1)$.
+
+\item
+There are ${8 \choose 4} = 70$ ways to choose the 4 people to move around, and $!4 = 9$ ways to switch all of their
+seats. This is assuming that, of the 4 people who move, all are required to end up in a different seat than they started.
+In this case, the answer is $70 \cdot 9 = 630$ ways.
+
+\item
+There are $4^n$ n-digit numbers with this property, so we get
+
+$$\sum_{n=1}^6 4^n = \frac{4^7 - 4}{3} = 5460 \text{ such integers.}$$
+
+\item
+I'll case count here as well, where the cases involve the square being of side length 1, the square not containing any
+points in the second quadrant (including x-axis), and the 4 cases of exactly one vertex in the second quadrant.
+
+Case 1: Side length is 1. We have a width and height of 6, so PIE gives $6+6-1 = 11$ squares in this case.
+
+Case 2: No points in Q2, side length > 1. There are 2 squares in this case: \{(0, 1), (1, 2), (2, 1), (1, 0)\} and
+\{(0, 0), (1, 1), (2, 0), (1, -1)\}.
+
+Case 3: One vertex in Q2. There are no squares with exactly two or 3 vertices in Q2 with side length greater than 1,
+which can be seen by checking each case. In all of these cases except for a single square \{(-1, 1), (0, 2), (1, 1), (0, 0)\},
+one of the vertices must also be in Q4 (including y-axis), so there are up to 4 other squares for each of the following
+subcases.
+
+Case 3a: (-1, 0) makes a square with (0, -1), (1, -1), and (1, -2), so there are 3 squares here.
+
+Case 3b: (-2, 0) makes squares with (0, -1), (1, -1), and (1, -2), so there are 3 squares here.
+
+Case 3c: (-1, 1) makes squares with (0, 2), (0, -1), and (1, -1), 3 squares here.
+
+Case 3d: (-2, 1) makes squares with (0, -1), (0, -2), and (1, -2), 3 squares here.
+
+The total is then $11 + 2 + 3 + 3 + 3 + 3 = 25$ squares in all.
+
+\item
+There are ${9 \choose 2} = 36$ ways of choosing 2 vertices of the nonagon and 2 ways to orient the third vertex
+of the triangle, for 72 total ways. However, some of these triangles are identical, so we need to use PIE to account
+for this. There are 3 equilateral triangles you can form from the vertices of a nonagon, so our final answer is
+
+$${9 \choose 2} \cdot 2 - {2 \choose 1} \cdot 3 = 66 \text{ distinct triangles}$$
+
+\item
+
+Fat has 3 choices of edge initially, then 2 choices, then 1 choice, for a total of $3! = 6$ ways.
+
+Alternatively, each point that shares an edge with vertex $G$ shares a face with vertex $A$ across the diagonal.
+There are 3 points that share an edge with vertex $G$ and there are 2 ways to traverse a face across the diagonal,
+for a total of $3 \cdot 2 = 6$ ways. This second argument also works in reverse.
+
+\item
+Rewrite $f(x) = \frac{1-x^{18}}{1+x}$, and $x = y-1$ to get
+
+\begin{align*}
+f(y) & = \frac{1-(y-1)^{18}}{y} \\
+& = \frac{1 - \sum_{k=0}^{18} {18 \choose k}(-1)^ky^k}{y} \\
+& = \sum_{k=0}^{17} {18 \choose k}(-1)^{k+1}y^{k-1} \\
+a_2 & = [y^2]f(y) = {18 \choose 3} = 816
+\end{align*}
+
+\item
+A distinct partition either contains 1 one time, or not at all. If you subtract 1 from every number in a partition of $n$
+of length $m$, it becomes a partition of $n-m$ of length $m$ (if the partition does not contain 1) or $m-1$ (if it does).
+This is the bijection that gives the identity
+
+$$d(n, m) = d(n-m, m) + d(n-m, m-1)$$
+
+\item
+There are 48 vertices total ($12 \cdot 4 = 8 \cdot 6 = 6 \cdot 8 = 48$), and from Euler's Formula we can determine the
+number of edges:
+
+$$V - E + F = 2 \iff E = 48 + 26 - 2 = 72$$
+
+Then there are $n(n-3)/2$ face diagonals per each regular $n$-gon face. Subtracting out these from the total gives
+
+\begin{align*}
+D & = {48 \choose 2} - 12\cdot\frac{4\cdot1}{2} - 8\cdot\frac{6\cdot3}{2} - 6\cdot\frac{8\cdot5}{2} - 72 \\
+& = 24\cdot47 - 24 - 24\cdot3 - 24\cdot5 - 24\cdot3 \\
+& = 24\cdot35 = 840 \text{ interior diagonals in total.}
+\end{align*}
+
+\item
+If we call $s_k$ the number of new servers in building $k$, then every pair of servers will be connected except for
+those in the same building, so the number we're looking for is
+
+\begin{align*}
+C & = {25 \choose 2} - \sum_{k=1}^{13} {s_k \choose 2} \\
+& \geq {25 \choose 2} - {13 \choose 2} - 12{1 \choose 2} \text{ (Jensen's Inequality)} \\
+& = 300 - 78 - 12\cdot0 = 222 \text{ connections at minimum.}
+\end{align*}
+
+Alternative, again using Jensen's Inequality:
+\begin{align*}
+\sigma_2 & = \frac{\sigma_1^2 - p_2}{2} = \frac{625 - p_2}{2} \geq \frac{625 - 1 \cdot 13^2 - 12 \cdot 1^2}{2} = \frac{444}{2} = 222
+\end{align*}
+
+\item
+Starting out, there are ${6 \choose 2}$ ways of choosing the empty boxes. After that, there are ${8 \brace 4}$ ways
+to partition 8 objects into 4 nonempty subsets, where this is the Stirling number of the second kind:
+
+$${n \brace k} = \frac{1}{k!}\sum_{i=0}^k (-1)^i {k \choose i}(k-i)^n$$
+
+Finally, we assign a distinguishable box to each of these partitions in $4!$ many ways, for a final answer of
+
+$${6 \choose 2}{8 \brace 4}4! = 15\cdot1701\cdot24 = 612360 \text{ ways in all.}$$
+
+\item
+There are ${4 \choose 2} = 6$ pairs of numbers, and each number must appear at least twice in the sequence, as
+each number has 3 pairs. This means that a sequence of length 8 is hypothetically the shortest, and testing:
+
+$$1, 2, 3, 4, 3, 1, 4, 2 \text{ is such a sequence.}$$
+
+\item
+Label the points $A, B, C, D, E, F$ such that $\{A, D\}, \{B, E\}, \{C, F\}$ are opposing pairs. Then, because the complements
+of equilateral triangles formed by these points are themselves equilateral triangles or else they are collinear, this problem
+is identical to finding four times the number of incongruent scalene triangles (twice because reflection is not allowed
+for equivalent coloring schemes, and twice for switching the coloring scheme). There are two such triangles,
+$\Delta ABD$ and $\Delta ABE$, but these are really a single solution because the complement of $\Delta ABD$ is
+$\Delta CEF \sim \Delta ABE$. Therefore there are 4 distinct coloring schemes.
+
+\item
+Let $n_p$ be the greatest integer less than or equal to $n$ that is divisible by $p$; that is, $n_p = p\left\lfloor \frac{n}{p} \right\rfloor$. Then:
+
+$${n \choose p} = \frac{n(n-1)\cdots (n-p+1)}{p\cdot (p-1)!} \equiv \frac{n_p}{p}\frac{\prod_{k \in \mathbb{Z}_p^{\times}} k}{\prod_{k \in \mathbb{Z}_p^{\times}} k} \equiv \left\lfloor \frac{n}{p} \right\rfloor \pmod{p}$$
+
+\item
+The digit 0 can't be a part of any ascending integer. If there are $k$ digits in an ascending integer ($k \geq 2$), then
+each digit is different. There are ${9 \choose k}$ ways of choosing the digits and only one way of ordering them, so
+there are
+
+$$\sum_{k=2}^9 {9 \choose k} = 2^9 - 10 = 502 \text{ ascending integers.}$$
+
+\item
+This number is limited by both the size of the possible values of $D_{\pi} \in \mathcal{P}(S)$, which is $|\mathcal{P}(S)| = 2^n$, and $|S_n| = n!$. For $n \geq 4$, the limiting factor will be $2^n$.
+
+The first thing to prove is that it is impossible for $A_i = D_{\pi}$ for any $i, \pi$. Clearly this is true for the identity
+permutation $\pi_0$, and then we can use the fact that
+
+$$D_{\pi}(A_1, \ldots, A_n) = D_{\pi_0}(A_{\pi(1)}, \ldots, A_{\pi(n)}) \neq A_{\pi(i)} \text{ for all }i.$$
+
+Then, since $\{A_i\} = \{A_{\pi(i)}\}$, this result follows. Aside from the $A_i$, there is no subset of $S$ which isn't
+attainable. In fact, letting $A_i = i$ allows you to construct every subset as a $D_{\pi}$ except for the single-element
+subsets, giving the answer as $2^n - n$.
+
+N.B. For the cases $n \in \{1, 2, 3\}$, where $2^n > n!$, we can notice that \\
+$2^n - n = n!$ and our stricter limit is not an issue.
+
+\item
+Of the prime powers, the primes are distinguishable but the powers are not. Factoring $2310 = 2\cdot3\cdot5\cdot7\cdot11$,
+we see we have no powers to worry about and we can instead think about partitioning these 5 distinguishable objects
+into (up to) 3 indistinguishable containers. This can be accomplished with Stirling numbers of the second kind or case counting.
+
+Case 1: The most primes in a specific variable is 2. In this case, there are 2, 2, and 1 prime in different boxes, and can be
+split up in ${5 \choose 2;2;1} = \frac{5!}{2!2!1!} = 30$ ways, though we have doubly counted because $a$ and $b$ contain
+the same number of primes. The total in this case is 15 ways.
+
+Case 2: The most primes in a specific variable is 3. In this case we can have $3, 2, 0$ or $3, 1, 1$. There are ${5 \choose 3} = 10$ in the former and ${5 \choose 3;1;1} = \frac{5!}{3!1!1!} = 20$ possibilities in the latter, though this is doubly counted similar
+to Case 1. The total in this case is $10 + 20/2 = 20$ ways.
+
+Case 3: The most primes in a specific variable is 4 or 5. This gives ${5 \choose 4} + {5 \choose 5} = 6$ possibilities in this case.
+
+Adding them up, we have 41 ways in total.
+
+Alternatively, we can sum the Stirling numbers of the second kind ${5 \brace k}$, the number of ways to split 5
+distinguishable objects into exactly $k$ containers. $\sum_{k=1}^3 {5 \brace k} = 1 + 15 + 25 = 41$ ways in total, as before.
+
+\item
+Because $i^n \in \{1, i, -1, -i\}$, we have 3 possible real-valued results for $i^x + i^y$.
+
+Case 1: $i^x + i^y = -2$. In this case we have $i^x = i^y = -1$, so $x \equiv y \equiv 2 \pmod{4}$. There are 25 such numbers
+in the given range, so there are $25^2 = 625$ cases here.
+
+Case 2: $i^x + i^y = 0 \implies i^x = -i^y \implies x - y \equiv 2 \pmod{4}$. For any choice of $x$, there are 25 choices of $y$
+to satisfy this equation, so there are $100\cdot25 = 2500$ cases here.
+
+Case 3: $i^x + i^y = 2 \implies x \equiv y \equiv 0 \pmod{4}$. As in Case 1 there are 625 possibilities.
+
+This gives a total of $625 + 2500 + 625 = 3750$ such ordered pairs.
+
+Alternative:
+
+We can also solve this probabilistically, since all events are equally likely. There is a $1/4$ probability that the sum
+will be 0, and any other off-axis sum (such as $1 + i$) is twice as likely than an on-axis sum. The probability of being on any
+axis (not the origin) is $\frac{1}{3}\frac{3}{4} = \frac{1}{4}$, so the probability of being on the $x$-axis is $1/8$. Our
+total number of events is $100^2 = 10000$, so our number of ordered pairs is $10000\cdot 3/8 = 3750$.
+
+\item
+First, we factor: $20! = 2^{18}\cdot3^8\cdot5^4\cdot7^2\cdot11\cdot13\cdot17\cdot19$, for 8 distinct primes in the
+factorization. Alternatively we could just count $\pi(20) = 8$. Given the fraction is written in lowest terms, there are
+no primes common to the numerator and denominator. Put another way, this is requiring the primes to be split between
+numerator and denominator. There are $2^8 = 256$ ways to do this, and each one has a unique rational number
+corresponding to it because it has to be between 0 and 1. Therefore the answer is 256.
+
+\item
+This is a good case for recursion. Let $c_n$ be the number of cuts required for $n$ points, $n \geq 5$, and then imagine
+adding the $(n+1)^{th}$ point. It is in the interior of one of the triangles, so there are 3 vertices to connect it to, and we
+have
+
+$$c_{n+1} = c_n + 3 \implies c_n = 3(n-5) + c_5$$
+
+And we count 4 cuts for the exterior of the square, 4 cuts for the edges connecting to the interior point, for $c_5 = 8$
+and therefore
+
+$c_{2003} = 3(1998) + 8 = 6002$ cuts are required.
+
+\item
+If $n$ is the number of players in the tournament, there are ${n \choose 2}$ total points earned. Of these, the ten
+players with the least points played each other ${10 \choose 2} = 45$ times, and therefore these players earned
+90 points in total, with 45 coming against the better-performing players. There are ${n-10 \choose 2}$ games between
+these players, and they account for half of the total points minus 45:
+
+$${n-10 \choose 2} = \frac{1}{2}{n \choose 2} - 45$$
+$$\frac{n^2 - 21n + 110}{2} = \frac{n^2 - n}{4} - 45$$
+$$n^2 - 41n + 400 = 0$$
+$$(n-16)(n-25) = 0$$
+
+If there are 16 players, there are 120 points in total, and so it is impossible that the worst-performing 10 players earn
+90 points (i.e. the worst $5/8$ of the players earn $3/4$ of the points). Therefore it must be the case that $n = 25$.
+
+\item
+I assume this question is meant to ask about subsets of $\{1, 2, \ldots, 2003\}$ instead of subsets of $T$, because
+otherwise this question isn't answerable without knowing $T$. We can accomplish this by case counting or PIE.
+
+Case counting:
+
+Case 1: Our subset is 2 relatively isolated groups of 3 and 2 elements, respectively. There are 2001 ways of choosing
+a consecutive group of 3 integers, and in all but 4 cases there are 1996 ways of choosing a consecutive pair of integers
+that does not border our group of 3.
+
+The aberrant 4 cases are (1, 2, 3), (2, 3, 4), and their images under the reflection $f(k) = 2004 - k$. These
+cases have 1998 and 1997 ways of choosing the pair, respectively, for a total of 6 added ways over the usual case across
+all special cases.
+
+Case 2: Our subset is a consecutive group of 5 integers, which can happen in 1999 ways. Therefore the total number across
+all cases is
+
+$$2001\cdot1996 + 6 + 1999 = 3996001 \text{ non-isolated five-element subsets.}$$
+
+N.B. This is $1999^2$, which suggests a different solution. Placing a 3- and a 2-element consecutive subset is equivalent
+to two partitions of the remaining 1997 elements (removing one for the requirement that the subsets not be adjacent)
+into a sum of 3 nonnegative integers (two for the ordering of the subset
+size) in $2{1999 \choose 2} = 1999\cdot1998$ ways. Placing a single 5-element consecutive subset is equivalent to a partition of
+1998 elements into a sum of 2 nonnegative integers in ${1999 \choose 1} = 1999$ ways. Then
+$1999\cdot1998 + 1999 = 1999^2$ as before.
+
+\item
+The only way a color scheme is not equivalent with 3 other color schemes is if the two squares are opposite across the
+center of the board. There are $\frac{7^2 - 1}{2} = 24$ such arrangements that are only equivalent with 1 other color scheme.
+
+$$\frac{{49 \choose 2} - 24}{4} + 24 = \frac{48^2}{8} + 24 = 312 \text{ inequivalent color schemes in all.}$$
+
+\item
+This is equivalent to filling 12 spaces among 3 offices, where 3 spaces will remain empty. If the offices are
+distinguishable this is like the number of ways to partition 3 into 3 nonnegative integers: ${5 \choose 2} = 10$ ways.
+
+If the offices are indistinguishable, this is the number of ways to partition 3 into at most 3 groups: $p(3) = 3$.
+
+\item
+Consider this recursively: for large enough $n$, if you remove $n$ from the set you have a partition of $\{1, \ldots, n-1\}$
+that satisfies the problem conditions. Then you can add $n$ to one of two sets in order to achieve a good partition of
+$\{1, \ldots, n-1\}$. Therefore, if $a_n$ is the number of such partitions, we have $a_n = 2a_{n-1}$.
+
+If the sets are distinguishable, we have the base case $a_1 = 3$ giving $a_{2003} = 3\cdot2^{2002}$.
+
+If the sets are indistinguishable, we have the base case $a_2 = 1$ giving $a_{2003} = 2^{2001}$.
+
+\item
+Referring back to Problem 9.13, we have the zero-counting function
+
+$$f(n) = \lfloor \frac{n}{5} \rfloor + \lfloor \frac{n}{5^2} \rfloor + \lfloor \frac{n}{5^3} \rfloor + \lfloor \frac{n}{5^4} \rfloor + \lfloor \frac{n}{5^5} \rfloor$$
+
+In general, this increments by 4 at every multiple of 625, else by 3 at every multiple of 125, else by 2 at
+every multiple of 25, else by 1 at every multiple of 5, else by 0. It skips the values
+
+$$\{n + 6k : k \in \{0, 1, 2, 3, 4, 5\}, n \in \{-1, 30, 61, 92, 123, 155, 186, 217,\ldots \}\} \cup \{154, \ldots\}$$
+
+\item
+In order to tie, all 3 letter places must flip in exactly one of the words. There are $2^3 = 8$ ways for this to happen,
+and each happens with equal probability $(\frac{1}{3})^3 (\frac{2}{3})^3 = \frac{8}{729}$, so the probability of
+a tie is $\frac{64}{729}$. In the remaining $\frac{665}{729}$ cases, consider the first place where the two strings
+differ. The likelihood of both strings being correctly received is 4 times the likelihood of both being flipped, so our
+answer is
+
+$$p = \frac{4}{5}\cdot\frac{665}{729} = \frac{532}{729}$$
+
+\item
+With these numbers being coprime, there is no danger of overcounting in the case of indistinguishable people.
+If they are indistinguishable, we can seat a girl at the head of the table, and consider the 25 boys with
+dividers of 7 girls. The number of ways to do this is equivalent to the number of ways to divide $25 - 2\cdot(7+1)
+= 9$ into a sum of 8 nonzero integers, or ${16 \choose 7}$. The final count in this case takes into consideration
+the 33 ways to rotate the table, for a total of $33\cdot{16 \choose 7} = 377520$.
+
+If they are distinguishable, there are 8! ways to rearrange the girls and 25! ways to rearrange the boys, so we
+multiply our previous answer by those to get 236105534067311213572364697600000000.
+
+\item
+In general, 2 digits can sum to $n$ in $10 - |n - 9|$ many ways. In the case of the first 2 digits of an integer between
+1000 and 9999, this becomes $n$ if $n < 10$, $19-n$ if $n \geq 10$ because the first digit can't be zero. Our answer is
+then
+
+$$\sum_{n=1}^9 n(n+1) + \sum_{n=10}^{18} (19-n)^2 = \sum_{n=2}^{10} 2{n \choose 2} + \sum_{n=1}^9 n^2 = 2{11 \choose 3} + \frac{9(10)(19)}{6} = 615$$
+
+\item
+Let $A \subseteq X; |A| = a \leq n$. There are ${n \choose a}$ choices of $A$.
+Then for any subset $B$ disjoint from $A$, we have $B \in \mathcal{P}(X\setminus A)$,
+i.e. there are $2^{n-a}$ choices of disjoint $B$. Counting this way, there are
+
+$$\sum_{a=0}^{n} {n \choose a} 2^{n-a} = 3^n \text{ disjoint pairs of sets in all.}$$
+
+(Another way to see this is that for each element of $X$, it either belongs to $A$, to $B$, or to neither.)
+
+Then, letting the size of the intersection be $k$, the desired sum is
+
+$$\sum_{k=0}^n {n \choose k}3^{n-k}\cdot k = 4^{n-1}\cdot n$$
+
+N.B. Dividing by the $4^n$ pairs of subsets gives an average of $n/4$ elements per pair intersection. By the same logic
+as we arrived at the $3^n$ disjoint pairs above, in addition to linearity of expectation, we can say that there is a
+$1/4$ chance that any element will belong to both $A$ and $B$, and therefore the sum is $\frac{n}{4}4^n = 4^{n-1}\cdot n$
+as before.
+
+\item
+$0.\overline{abc} = \frac{\overline{abc}}{999}$, and we can factor $999 = 3^3 \cdot 37$. All $\phi(999) = 3^2(3-1)\cdot36 = 648$
+numbers less than 999 that are coprime to it will show up as numerators, and only those multiples of 3 that are less
+than 37 (i.e. $\frac{3}{37}, \ldots, \frac{36}{37}$) will show up as numerators. Since $37 > 3^3$, no multiples of 37 will
+show up as numerators. This gives a total of $648 + 12 = 660$ different numerators.
+
+\item
+Using PIE, we see that the intersection of two sets of these integers appearing consecutively is the case when
+all 4 appear together. There are ${4 \choose 3} = 4$ ways of choosing three of these, 3! ways of rearranging them,
+$(n-2)$ places to put them, and $(n-3)!$ ways of rearranging the other $n-3$ elements of the set. In the intersection
+of these sets, when all four of these appear consecutively, there are $4!$ ways of rearranging these elements,
+$(n-3)$ places to put them, and $(n-4)!$ ways of rearranging the other elements. In total we have:
+
+\begin{align*}
+& 4\cdot 3! \cdot (n-2)\cdot (n-3)! - 4!\cdot(n-3)\cdot(n-4)! \\
+ = \; & 24(n-3)!((n-2) - 1) = 24(n-3)(n-3)!
+\end{align*}
+
+\item
+There are 14 connections and 14 possibilities for $|a - b|$, so each of these absolute values must be represented.
+Each of the numbers is connected to an even number of other numbers, and therefore if we sum all of the
+absolute value differences we will get an even number. However, \\
+$\sum_{k=1}^{14} k = 105$, so this is not possible.
+
+\item
+Initially there are $1024 = 2^{10}$ closed lockers.
+After walking down the hall and returning, only numbers equivalent to $2 \pmod{4}$ remain closed. The transformation
+$f(n) = \frac{n-2}{4} + 1$ then turns this into numbers 1 through $256 = 2^8$. Another 3 trips down the hall and another
+3 applications of $f$ later and we have just $\{1, 2, 3, 4\}$, leaving 2 as the final number. The answer is then
+
+\begin{align*}
+f^{-1}(f^{-1}(f^{-1}(f^{-1}(2)))) & = f^{-1}(f^{-1}(f^{-1}(6))) \\
+& = f^{-1}(f^{-1}(22)) \\
+& = f^{-1}(86) = 342
+\end{align*}
+
+\item
+As the length and width are both even, two of the four corners of this chessboard contain white squares. Orient
+the board so that they are in the top left and bottom right. Considering the board like a matrix, fill the main
+diagonal with 2002 ones. Next, fill the three white squares $M_{2, 2002}, M_{1, 2003}, M_{2, 2004}$ with ones
+and the one black square $M_{1, 2002}$ with a one. Fill the rest of the board with zeros. Then there are 3 ones
+in rows 1 and 2 with 1 one in each other row. There are 3 ones in column 2002 with 1 one in each other row. In
+other words, this arrangements satisfies the problem constraints. However, there are 2005 white unit squares
+containing 1, a contradiction to the problem statement.
+
+Alternatively, filling all of the $2001 \times 2003$ top left corner with ones, as well as the bottom-right corner,
+satisfies the problem constraints and gives \\
+$2\cdot1001^2 \pm 1$ white squares depending on
+choice of board orientation; in either case, an odd number. In fact it is difficult to find a board configuration
+that satisfies the problem setup but doesn't contain an odd number of white squares, suggesting a typo.
+
+I will prove that both the number of white and black squares must be odd.
+
+Consider how to add (or remove) ones from a good configuration to obtain another good configuration. If you change
+a row by 2 ones (this number must be even so that the row sum stays odd), you must change these 2 columns
+by 1 one each (so that the column sum stays odd). Furthermore, these last 2 changes must happen in the same row,
+so that that row sum stays odd. Extract the 4 squares in question, preserving their orientation, to form a $2 \times 2$
+square. These can either be all white (or black), one row (or column) white and the other black, or chessboard-patterned.
+In any case, either none of them change (from/to 0 to/from 1) or all of them do, giving either 2 or 4 changes for both
+white and black squares. Therefore if one good configuration has an odd number of white and black squares, they all do.
+
+\item
+Any binary representation of a positive integer begins with a 1. As a result, excluding
+odd-length representations with one more 1 than 0, exactly half of all binary representations have
+more ones than zeros.
+
+For the special case of length $2k + 1$ representations with $k+1$ 1s and $k$ 0s, there are
+${2k \choose k}$ ways to place the zeros. Because $2003 = \overline{11111010011}_2$, all of these
+such 11-digit binary numbers are less than 2003. In addition, every number greater than 2003 has more
+1s than 0s in its binary representation. Therefore the total is
+
+$$\frac{2^{11} + \sum_{k=1}^{5} {2k \choose k}}{2} - (2^{11} - 2003 - 1) = 1155$$
+
+\item
+Number the vertices 1 to $n$, then consider the edge between vertices 1 and 2. This is part of a single triangle in every
+triangulation, and let $k$ be the third vertex of the triangle in a triangulation. The given triangle splits the $n$-gon
+into a $(k-1)$-gon and a $(n-k+2)$-gon on either side, where a 2-gon is considered to be a line segment.
+
+With the convention that $a_n$ is the number of triangulations of an $n$-gon, and $a_2 = a_3 = 1$, we can write
+
+$$a_n = \sum_{k=3}^n a_{k-1}a_{n-k+2}$$
+
+This is very reminiscent of the Catalan number recursion, and indeed if we make the substitution $c_n = a_{n+2}$ we get
+
+$$c_n = a_{n+2} = \sum_{k=3}^{n+2} a_{k-1}a_{n+2-k+2} = \sum_{k=0}^{n-1} a_{k+2}a_{n-k+1} = \sum_{k=0}^{n-1} c_k c_{(n-1)-k}$$
+
+This is the Catalan number recursion exactly. As we have the base case covered as well ($a_2 = a_3 = 1$), this sequence is
+exactly equal to the Catalan numbers. Therefore $a_n = c_{n-2} = \frac{1}{n-1}{2n-4 \choose n-2}$ is the number of possible
+triangulations of a convex $n$-gon.
+
+\item
+In Example 8.4, let $k$ be the position of the tallest student when the places are numbered 1 to $n$ from left to right.
+Then we cannot have any student in position $i < k$ be taller
+than any student in position $j > k$, meaning that this creates a partition where the shortest $(k-1)$ students must be in the
+first $(k-1)$ positions, with the rest of the students in positions $(k+1)$ through $n$. Notice, too, that any subarrangement
+in these two locations must satisfy the conditions of the problem; therefore there are $a_{k-1}a_{n-k}$ of them.
+
+The tallest student may be in any location, giving $a_n = \sum_{k=1}^n a_{k-1}a_{n-k} = \sum_{k=0}^{n-1} a_ka_{(n-1)-k}$,
+as desired.
+
+\item
+There are $333 - 33 = 300$ 3-digit numbers divisible by 3, and therefore 900 possible digits to remove.
+Using PIE we can count the occurrences of 0, 3, 6, and 9.
+Only if one of these digits is removed will a multiple of 3 remain divisible by 3.
+
+There are $3\cdot 34 = 102$ multiples of 3 that begin with a 3, 6, or 9, and $2\cdot4\cdot 30 =  240$ multiples that have
+one of these digits in the second place plus those that have it in the third place. The $3 \cdot 4^2 = 48$ numbers where
+\emph{every} digit is 0, 3, 6, or 9 are overcounted twice here, but this is appropriate because we want to measure the
+odds of removing one of these as a digit.
+
+$$\frac{102 + 240}{900} = \frac{342}{900} = \frac{19}{50}$$
+
+\item
+Consider the first 3 draws. Either a pair is found here, with probability
+$\frac{{6 \choose 1}\cdot5\cdot2}{{12 \choose 3}} = \frac{3}{11}$, or the game is instantly lost. If a pair is found,
+this is the game with 5 pairs of tiles instead of 6. Telescoping, we get our final probability as:
+
+$$\frac{3}{11}\cdot\frac{3}{9}\cdot\frac{3}{7}\cdot\frac{3}{5}\cdot\frac{3}{3} = \frac{9}{385}$$
+
+\item
+There are $n!$ bases, and an even number of them are negative. To see why, notice that every element is a part of
+$(n-1)!$ bases, and therefore changing a single element will change the sign of $(n-1)!$ bases, an even number if $n \geq 4$.
+Let there be $2k$ negative bases, then the sum of all bases is $(n! - 2k) - 2k = n! - 4k \equiv 0 \pmod{4}$ because
+$n \geq 4 \implies n! \equiv 0 \pmod{4}$.
+
+\item
+Each column consists of two 1s and two -1s, there are ${4 \choose 2}$ ways to do this. Then, partitioning these six
+column vectors into 2 groups, with $\vec{v}$ in one column and $-\vec{v}$ in the other, there are 2 cases.
+
+Case 1: Our array is filled with two of the same column vector; the 4 columns are $\{\vec{v}, \vec{v}, -\vec{v}, -\vec{v}\}$.
+In this case there are 3 choices of $\vec{v}$ and ${4 \choose 2} = 6$ ways of rearranging them for a total of 18 such arrays.
+
+Case 2: Our array is filled with four different column vectors; the 4 columns in this case must be
+$\{\vec{u}, \vec{v}, -\vec{u}, -\vec{v}\}$. There are ${3 \choose 2} = 3$ choices of $\vec{u}$ and $\vec{v}$ and $4! = 24$
+ways of rearranging them inside the matrix for a total of 72 such arrays.
+
+Our sum across the two cases is $18 + 72 = 90$.
+
+\item
+This incrementing the index of the binomial coefficient by $p$ and asking to prove divisibility by $p$ (i.e. that the sum
+is congruent to 0 $\pmod{4}$) is asking for an application of Lucas' Theorem (Theorem 3.3). Writing $n = mp + r$:
+
+\begin{align*}
+\sum_{k=0}^{n} (-1)^k{n \choose pk} & \equiv \sum_{k=0}^n (-1)^k{m \choose k}{r \choose 0} \\
+& \equiv \sum_{k=0}^m (-1)^k{m \choose k} \\
+& \equiv (1 - 1)^m \equiv 0 \pmod{p}
+\end{align*}
+
+\item
+First, we will note that it isn't possible to form two distinct triangles with 4 segments, so there is no PIE concern.
+Second, we will do some basic counting: there are ${10 \choose 2} = 45$ segments, ${45 \choose 4}$ ways of
+choosing the 4 distinct segments, and ${10 \choose 3} = 120$ possible triangles to form. The number of ways
+a triangle can be chosen with 4 segments is $120 \cdot 42$, as there are 42 segments not in a given triangle.
+Therefore our probability is:
+
+$$\frac{120 \cdot 42}{{45 \choose 4}} = \frac{120\cdot42\cdot24}{45\cdot44\cdot43\cdot42} = \frac{16}{473}$$
+
+\item
+Let $\{b_k\}$ be the set of integers with $b_k = a_k - k$. Then we have $0 \leq b_1 \leq b_2 \leq \cdots \leq b_m \leq n-m$.
+In addition, all $b_k$ are even, so with one more substitution $c_k = \frac{1}{2}b_k$ we get
+$0 \leq c_1 \leq \cdots \leq c_m \leq \left\lfloor \frac{n-m}{2} \right\rfloor$. The number of sequences satisfying this
+is equal to the number of ways $(m+1)$ nonnegative integers can add to $\left\lfloor \frac{n-m}{2} \right\rfloor$:
+${m + \left\lfloor \frac{n-m}{2} \right\rfloor \choose m}$.
+
+\item
+\begin{align*}
+\sum_{k=0}^n \frac{1}{(n-k)!(n+k)!} & = \frac{1}{(2n)!}\sum_{k=0}^n {2n \choose n+k} \\
+& = \frac{1}{2(2n)!}\left({2n \choose n} + \sum_{k=0}^{2n}{2n \choose k} \right) \\
+& = \frac{1}{2(n!)^2} + \frac{4^n}{2(2n)!}
+\end{align*}
+
+\item
+Forty teams play eachother in ${40 \choose 2} = \sum_{k=0}^{39} k$ games, so clearly the teams' scores must
+be 0 to 39. If we assign these scores, there is only one way in which the games can go: each team must win against
+the team with a lower score and lose to teams with a higher score. As there are 40! ways of assigning the scores,
+and each game generates two equally likely possibilities, our probability is:
+
+$$\frac{40!}{2^{{40 \choose 2}}} = \frac{40!}{2^{780}}$$
+
+\item
+Let $p_k$ be the probability that the drawing player wins, given that the current congruency class of the sum is $k$, then
+we're looking for $p_0$. Considering two draws at a time, we have:
+
+\begin{align*}
+p_0 & = \frac{1}{4} + \left(\frac{1}{2}\cdot\frac{1}{4} + \frac{1}{2}\cdot\frac{1}{4}\right)p_1 + \left(\frac{1}{2}\cdot\frac{1}{2} + \frac{1}{4}\cdot\frac{1}{4}\right)p_2 \\
+p_1 & = \frac{1}{4} + \left(\frac{1}{2}\cdot\frac{1}{4} + \frac{1}{4}\cdot\frac{1}{4}\right)p_1 + 2\cdot\frac{1}{2}\cdot\frac{1}{4}p_2 \\
+p_2 & = \frac{1}{2} + 2\cdot\frac{1}{4}\cdot\frac{1}{4}p_1 + 2\cdot\frac{1}{4}\cdot\frac{1}{4}p_2 \\
+\end{align*}
+
+Which, solving this system, gives $p_0 = \frac{101}{166}$ as our desired probability.
+
+\item
+The first thing to notice is if the statement is false, the set $\{S(a) : a \in S_n\}$ maps bijectively modulo $n!$ to the
+set of all congruency classes $\pmod{n!}$. Then we can count $\sum{a \in S_n}S(a)$ in two ways, first by summing
+all congruency classes:
+
+$$\sum_{a \in S_n}S(a) \equiv \sum_{k=0}^{n!} k = \frac{n!(n! - 1)}{2} \equiv \frac{n!}{2} \pmod{n!} \text{, as n! is even.}$$
+
+On the other hand,
+
+\begin{align*}
+\sum_{a \in S_n}S(a) & = \sum_{a \in S_n}\sum_{i=1}^n c_i a_i \\
+& = \sum_{i=1}^n c_i \sum_{a \in S_n} a_i \\
+& = \sum_{i=1}^n c_i (n-1)!\frac{n(n+1)}{2} \\
+& = n! \cdot \frac{n+1}{2}\cdot \sum_{i=1}^n c_i \equiv 0 {\pmod n!} \text{, as n is odd.}
+\end{align*}
+
+This contradiction means $\{S(a) : a \in S_n\}$ does not contain all congruency classes mod n!, and by the Pigeonhole
+Principle we must have at least two permutations $b$ and $c$ such that $S(b) - S(c) \equiv 0 \pmod{n!}$.
+
+\item
+Given that there are three $HT$ sequences and four $TH$ sequences, we must start with a $T$ and end with an $H$.
+There are otherwise 5 $H$s and 8 $T$s, and if we imagine the sequence before placing the rest of the $H$s:
+$TTTTTTTTTH$, we see that in order to have 3 $HT$ and 4 $TH$ occurrences we must distribute the remaining 5
+into 4 groups of $H$s (one of them grouped with the last $H$, may be a group of 0). This can be done in the same
+number of ways as partitioning 6 into 4 positive integers: ${5 \choose 3} = 10$ ways. The last group must be on the
+far right, but the other 3 groups have 8 choices between the 9 $T$s, for a total of
+
+$${5 \choose 3}{8 \choose 3} = 560 \text{ ways in all.}$$
+
+Alternative: Based on the logic above, the underlying structure of our answer is TXHYTXHYTXHYTXHY,
+where heads go in the Y spots and tails go in the X spots. This gives the same multiplication as before.
+
+\item
+There are ${n+2 \choose 2} = \frac{(n+1)(n+2)}{2}$ ways to split $n$ into 3 nonnegative integers, and this choice is
+independent across the 3 rows. Therefore the total number is ${n+2 \choose 2}^3$ matrices.
+
+\item
+Because $P(\text{win}) = P(\text{lose}) = 1/3$, the wins and losses are symmetric, and it will be easier to count this
+as $\frac{1}{2}(1 - P(\text{wins = losses}))$. Each outcome is equally likely, and so:
+
+\begin{align*}
+P(\text{wins = losses}) & = \sum_{k=0}^3 {6 \choose 2k; 3-k}\left(\frac{1}{3}\right)^6 \\
+& = \frac{1}{3^6}\sum_{k=0}^3 {6 \choose 2k}{6 - 2k \choose 3-k} \\
+& = \frac{1}{3^6}(20 + 15\cdot6 + 15\cdot2 + 1) \\
+& = \frac{47}{243}
+\end{align*}
+
+And therefore our desired probability is
+
+$$P(\text{wins}>\text{losses}) = \frac{1}{2}\left(1 - \frac{47}{243}\right) = \frac{98}{243}$$
+
+\item
+This is a very rough argument, and worth coming back to to prove rigorously. The maximum density of diagonal elements
+in a semiperimeter $n$ submatrix of an $n \times n$ matrix is $1/\left\lfloor\frac{n+1}{2}\right\rfloor$, which comes
+from making that submatrix as ``square'' as possible. Noticing the inverse relationship between semiperimeter
+and diagonal element density, and the fact that the submatrix of overlap between two semiperimeter $n$ submatrices
+will always have a smaller semiperimeter, by PIE the subset $A \cup B$ has lower density than either of the submatrices
+$A$ or $B$. Therefore the upper limit on diagonal element density for a union of submatrices (such as the collection
+we're interested in) is $1/\left\lfloor\frac{n+1}{2}\right\rfloor$, and therefore our collection must have at least
+$n\left\lfloor\frac{n+1}{2}\right\rfloor \geq \frac{n^2}{2}$ squares in it.
+
+\item
+After satisfying the minimum requirements, there are $k$ places to put $n-(m+1)k$ empty chairs. This is equivalent
+to partitioning $n-(m+1)k$ into $k$ nonnegative integers, which we can do in ${n-mk-1 \choose k-1}$ ways.
+
+Then there are $n$ ways of rotating this arrangement, and we overcount the students' placement $k$ times, so our
+final answer is $\frac{n}{k}{n-mk-1 \choose k-1}$.
+
+\item
+I'm going to include degenerate triangles in my count, that is, triangles with $a = 0$ or $a+b = c$. A triangle with
+integer side lengths including $k \leq m$ and $2m + 1 - k$ can have a third side between $2(m-k) + 1$ and $2m + 1$,
+i.e. there are $2k + 1$ of them. The only overlap between the triangles of different $k$ values is when the triangle
+is isosceles (note there are no such equilateral triangles).
+If $k \geq 2(m-k)+1 \iff \left\lceil\frac{2m + 1}{3}\right\rceil \leq k \leq m$, there are
+$m - \left\lceil\frac{2m + 1}{3}\right\rceil + 1$ such isosceles triangles. On the other hand, all $m$ possible long-sided
+isosceles triangles are valid.
+Therefore
+
+$$n = \left(\sum_{k=0}^m 2k+1\right) - (m - \left\lceil\frac{2m + 1}{3}\right\rceil + 1) - m = m^2 - 1 + \left\lceil\frac{2m + 1}{3}\right\rceil$$
+
+\item
+Bonnie's probability of winning the first game is half of Alfred's, so \\
+$P(\text{win game }|\text{ go first}) = 2/3$. If we call $p_n$ the probability that Alfred wins game $n$, we have the
+recursion
+
+$$p_n = \frac{1}{3}p_{n-1} + \frac{2}{3}(1 - p_{n-1}) = \frac{2 - p_{n-1}}{3}; \; p_1 = \frac{2}{3}$$
+
+Calculating it out to find $p_6$, we get:
+
+\begin{align*}
+& p_2 = \frac{\frac{6 - 2}{3}}{3} = \frac{4}{9} \\
+& p_3 = \frac{\frac{18 - 4}{9}}{3} = \frac{14}{27} \\
+& p_4 = \frac{\frac{54 - 14}{27}}{3} = \frac{40}{81} \\
+& p_5 = \frac{\frac{162 - 40}{81}}{3} = \frac{122}{243} \\
+& p_6 = \frac{\frac{486 - 122}{243}}{3} = \frac{364}{729} \text{ is our final answer.}
+\end{align*}
+
+\item
+For a particular element $a \in \{1, 2, \ldots, 1998\}$ it is absent in half of all $A_i$. Therefore it is absent in $1/2^n$
+of all $\cup_{i=1}^n A_i$, or $2^{1997n}$ of them to be precise. Then we can find the sum of all such unions by
+summing the size of the set and subtracting the missing elements:
+
+$$\sum_{(A_1, \ldots, A_n) \in F} |\cup_{i=1}^n A_i| = 1998\cdot 2^{1998n} - 1998 \cdot 2^{1997n} = 1998\cdot 2^{1997n}(2^n - 1)$$
+
+\item
+\begin{align*}
+\sum_{k=0}^n \frac{1}{k+1}{n \choose k} & = \sum_{k=0}^n \frac{1}{n+1}{n+1 \choose k} \\
+& = \frac{1}{n+1}\left( \sum_{k=0}^{n+1} {n+1 \choose k} - 1 \right) \\
+& = \frac{1}{n+1}\left(2^{n+1} - 1\right)
+\end{align*}
+
+\item
+Assume, to achieve a contradiction, that there is an element $a_i$ that appears in $P_r, P_s, P_t$. Then there are two
+subsets, say $P_r$ and $P_s$, with $r \neq i, s \neq i$. Since $P_r \cap P_s \neq \emptyset$, we must have
+$P_r = \{a_r, a_s\}$ or $P_s = \{a_r, a_s\}$. This is a contradiction, since $a_i \in P_r, a_i \in P_s$, and therefore there
+is no element which appears in more than two of the $P_k$s.
+
+As there are $n$ subsets with two elements each, there are $2n$ elements in all of the $P_k$s. Since no element
+may appear 3 or more times, there are $2n$ elements in all the subsets if and only if each element appears twice.
+
+\item
+There is a one-to-one bijection between legal Chomp board states and paths from (0, 5) to (7, 0) which only move
+downward and rightward. To construct the path from the Chomp board state, take the continuation of the left
+side of the board up to (0, 5) and the bottom of the board to (7, 0) and consider the right-and-top edge path between
+these two points. To construct the Chomp board state from the path, everywhere the path moves down take a bite
+of the square immediately to the right. Therefore there are ${12 \choose 5} = 792$ paths.
+
+\item
+We can partition the 15 points into 3 sets of 5 points which are only combos with each other: $\{a_1, a_4, \ldots, a_{13}\}$,
+$\{a_2, a_5, \ldots, a_{14}\}$, and $\{a_3, a_6, \ldots, a_{15}\}$. Then any combo is simply a pair of adjacent elements in one
+of these 3 subsets. There is 1 way of choosing 0 elements from one of these subsets, 5 ways of choosing 1 element,
+and 5 ways of choosing 2 elements without a combo (i.e. without a pair of adjacent elements, exactly it is
+$\frac{5}{2}{2 \choose 1}$ c.f. Problem 9.71) for a total of 11 ways of choosing elements from a subset. These choices
+are independent between the 3 subsets, so there are $11^3 = 1331$ total ways to pick sets of points without a combo.
+
+\item
+For an integer $k$ in this range, there are $k-1$ integers less than it and $10-k$ integers greater than it; therefore
+it will contribute $k(k-1-(10-k)) = k(2k-11)$ among all its pairs. Then our answer is
+
+$$\frac{1}{9}\sum_{k=1}^{10}k(2k-11) = \frac{165}{9} = \frac{55}{3}$$
+
+N.B. There are 9 pairs of integers in each permutation sum, 10! permutations, and ${10 \choose 2} = \frac{10 \cdot 9}{2}$
+pairs of integers in all. Therefore each pair of integers appears $9!/2$ times in the sum.
+
+\item
+\begin{align*}
+\sum_{k=m}^n (-1)^{k+m}{n \choose k}{k \choose m} & = \sum_{k=m}^n (-1)^{k+m}{n \choose n-k; m; k-m} \\
+& = \sum_{k=m}^n (-1)^{k+m}{n \choose m}{n-m \choose k-m} \\
+& = {n \choose m}\sum_{k=0}^{n-m}(-1)^k{n-m \choose k} \\
+& = {n \choose m}(1-1)^{n-m} \\
+& = {n \choose m}0^{n-m} = \delta_{n,m} \text{, the Kronecker delta.}
+\end{align*}
+
+\item
+First of all, $n \geq b_{k+1} \geq b_k + a_k \geq \ldots \geq b_1 + \sum_{i=1}^k a_i \geq 1 + \sum_{i=1}^k a_i$
+is the requirement for such a sequence to exist at all. Secondly the function
+
+$$f(b_1, \ldots, b_{k+1}) = (0, b_2 - b_1 - a_1, \ldots, b_j - b_1 - \sum_{i=1}^{j-1}a_i, \ldots, b_{k+1} - b_1 - \sum_{i=1}^k a_i$$
+
+forms a bijection between the set of our solution sequences and the set of all nondecreasing sequences of length $k+1$
+starting at 0 and ending at $m, 1 + \sum_{i=1}^k a_i \leq m \leq n$. The number of these sequences is equal to the number
+of ways to partition $m$ into $k$ nonnegative integers: ${m + k - 1 \choose k-1}$. Therefore, letting $A = \sum_{i=1}^k a_i$,
+our answer is
+
+$$\sum_{m=A + 1}^n {m + k - 1 \choose k-1} = {m + n \choose k} - {m + A + 1 \choose k}$$
+
+\item
+This is supposed to read $x \in A \cup B$ instead of $x \in A \cap B$, because if $A$ and $B$ are disjoint this
+intersection is empty.
+
+Lemma 1: If $(x_1, x_2, \ldots, x_{|A| + |B| + 1})$ is a sequence in $A \cup B$ satisfying
+$x_{k+1} \in \{x_k + a \in A, x_k - b \in B\}, x_{k + 1} \neq x_{k-1}$ unless by necessity (i.e. $a=b$ and these are the
+only choices), then there is some $k \neq 1 : x_k = x_1$.
+
+Proof of Lemma 1: By the problem statement such a sequence always exists. There are only $|A| + |B|$ elements in $A \cup B$,
+so by the Pigeonhole principle we must have a repeat element. Let's say, to achieve a contradiction, that this is $x_m$
+and that it appears before $x_1$ appears again (if it ever \emph{does} repeat). There are only two elements, $x_m - a$ and
+$x_m + b$, that can precede $x_m$ in the sequence. They must appear on either side of $x_m$ the first time it appears,
+and therefore $x_{m-1}$ repeats before $x_m$, a contradiction.
+
+Call the sequence $(x_1, \ldots, x_k)$ up to the first repeat of $x_1$ a \emph{cycle}.
+
+Lemma 2: These \emph{cycles} form a partition of $A \cup B$.
+
+Proof of Lemma 2: By the problem statement, every element belongs to a cycle. In addition, we cannot have an
+element belong to 2 different cyles. If we did, then we could start in one cycle, complete half of it, switch over to the
+other cycle, and have a repeat element earlier than $x_1$.
+
+In a cycle, let $n_a, n_b$ be the number of elements in $A, B$ respectively. Then we add $a$ $n_a$ times and subtract
+$b$ $n_b$ times to end where we started; that is, $a\cdot n_a - b\cdot n_b = 0 \iff a\cdot n_a = b \cdot n_b$. Summing
+across all cycles, $a|A| = b|B|$.
+
+\item
+See the answer to Problem 9.16 for a more in-depth treatment of this sum.
+
+\item
+We know that letters 1-7 have been distributed already, and therefore must be in increasing order. There are $2^7$
+ways of this happening, and if there are $k$ letters left to type after lunch, the $9^{\text{th}}$ letter may be placed
+at any time among them in $k+1$ ways, or it may have already been typed (that is, it may not appear after lunch).
+Therefore, the total number of after lunch typing orders is
+
+$$\sum_{k=0}^7 {7 \choose k}(k+2) = 7\cdot2^6 + 2\cdot2^7 = 704$$
+
+\item
+We'll use a linear recursion to solve for the number of $n$-digit numbers satisfying this property and then plug in $2n$
+instead. Let $a_n$ be the number of $n$-digit even-sum numbers starting with an even number, $b_n$ the even-sum
+starting with odd, $c_n$ the odd-sum starting with even, and $d_n$ the odd-sum starting with odd. Then we can only
+get $a_n$ from $a_{n-1}$ and $b_{n-1}$ (and similar conditions exist for $b_n, c_n, d_n$), and there are 4 even
+numbers and 5 odd numbers we can start with. This gives:
+
+$$\begin{bmatrix} a_{n+1} \\ b_{n+1} \\ c_{n+1} \\ d_{n+1} \end{bmatrix} = \begin{bmatrix} 4 & 4 & 0 & 0 \\ 5 & 0 & 0 & 5 \\ 0 & 0 & 4 & 4 \\ 0 & 5 & 5 & 0 \end{bmatrix} \begin{bmatrix} a_n \\ b_n \\ c_n \\ d_n \end{bmatrix}; \; \begin{bmatrix} a_1 \\ b_1 \\ c_1 \\ d_1 \end{bmatrix} = \begin{bmatrix} 4 \\ 5 \\ 4 \\ 5 \end{bmatrix}$$
+
+After the eigendecomposition and solving the initial value problem, we get formulas for $a_n$ and $b_n$ which we can
+combine into:
+
+\begin{align*}
+a_{2n} + b_{2n} = & \; \frac{9^{2n}}{2} + \left(\frac{-19 + \sqrt{161}}{4\sqrt{161}}\right)\left(\frac{1+\sqrt{161}}{2}\right)^{2n} \\
+& + \left(\frac{19 + \sqrt{161}}{4\sqrt{161}}\right)\left(\frac{1-\sqrt{161}}{2}\right)^{2n}
+\end{align*}
+
+This is not satisfying as an answer, but I have yet to come up with another way of solving this problem or identifying
+the sequence this produces: $\{56, 3736, 277816, 21774296, 1744365176, \ldots \}$. In any case, 9 is the largest eigenvalue
+and therefore $\lim_{n \to \infty} \frac{a_{2n} + b_{2n}}{\left(\frac{9^{2n}}{2}\right)} = 1$.
+
+\item
+There are $n$ ways to choose the first marble, then there are $n-1-a_1$ ways to pick the second (without picking
+the original marble or the $a_1$ marbles in front of it), $n-2-a_2$ ways to pick the third, and $n-i-a_i$ ways to pick
+the $i^{\text{th}}$.
+
+For any particular choice of $\{a_i\}$, this gives $n \prod_{i=1}^n n - i - a_i$ ways in total, or 0 ways if $a_i + i \geq n$ for
+any $i$.
+
+\item
+If $n$ is even, $\left \lfloor \frac{n}{2} \right \rfloor = \frac{n}{2}$ and this is half of the sum across the $n^{\text{th}}$
+row of binomial coefficients. If $n$ is odd, $\left \lfloor \frac{n}{2} \right \rfloor = \frac{n-1}{2}$ and this is half of the
+sum across the row, but missing the element $\left[{n \choose \frac{n+1}{2}} - {n \choose \frac{n-1}{2}}\right]^2 = 0$.
+Therefore in either case, we have
+
+\begin{align*}
+\sum_{k=0}^{\left\lfloor \frac{n}{2} \right\rfloor} \left[{n \choose k} - {n \choose k-1}\right]^2 & = \frac{1}{2}\sum_{k=0}^{n+1} \left[{n \choose k} - {n \choose k-1}\right]^2 \\
+& = \frac{1}{2}\sum_{k=0}^{n+1} \left[{n \choose k}^2 + {n \choose k-1}^2 - 2{n \choose k}{n \choose k-1}\right] \\
+& = \frac{1}{2}\sum_{k=0}^n {n \choose k}^2 + \frac{1}{2}\sum_{k=1}^{n+1}{n \choose k-1}^2 - \sum_{k=0}^{n+1}{n \choose k}{n \choose k-1} \\
+& = \sum_{k=0}^n {n \choose k}^2 - \sum_{k=0}^{n+1}{n \choose k}{n \choose n-k+1} \\
+& = {2n \choose n} - {2n \choose n+1} \text{ (Vandermonde's Identity)} \\
+& = {2n \choose n} - \frac{n}{n+1}{2n \choose n} \\
+& = \frac{1}{n+1}{2n \choose n}
+\end{align*}
+
+\item
+There are $15!$ ways to choose the boys, the same number of ways to choose the girls, and $2^{15}$ ways of
+arranging the pairs. When we account for the $15$ ways this table can be permuted, there is also the problem
+of double counting the alternating arrangements BGBG...BG and GBGB...GB, so we must
+subtract one from the ways of arranging the pairs to account for this. Then our final answer is $15!14!(2^{15} - 1)$
+possible seating arrangements.
+
+\item
+By noticing that the requirements on $\{a_i\}$ are similar to Example 5.11, we can create a bijection between
+series satisfying the given constraints and those of Example 5.11. Let $c_k = a_{n+1 - k}$, then the first
+requirement becomes $1 \leq a_{n + 1 - k} = c_k \leq k$, which forces $c_1 = 1$. The second requirement is
+$a_{i+1} \geq a_i + 1 \iff c_i \leq c_{i+1} + 1$, and therefore the constraints are identical to Ex. 5.11. Because
+multiplication is commutative, $\sum (a_1 \cdots a_n) = \sum (c_1 \cdots c_n) = (2n-1)!!$.
+
+\item
+This is Moser's circle problem, and we will get to the answer by using Euler's Formula: $V - E + F = 1$ for a
+compact subset of $\mathbb{R}^2$. There are 2 types of vertices, those on the boundary of the circle ($V_{\text{b}}$)
+and those in the interior ($V_{\text{i}}$). Similarly, there are 2 types of edges: $E_{\text{b}}$ for circular arcs
+and $E_{\text{i}}$ for line segments.
+As $V_{\text{b}} = E_{\text{b}} = n$, we have $F_n = 1 + E_{\text{i}} - V_{\text{i}}$.
+
+Assuming no coincidence of interior diagonals, every 4 boundary vertices correspond bijectively to each interior
+point. Therefore $V_{\text{i}} = {n \choose 4}$.
+
+There are ${n \choose 2}$ interior diagonals, and each one is further split into connections between interior points.
+There are ${n \choose 4}$ interior points, each of which has 4 connections with its neighbors. Those connections
+are shared between 2 vertices, so the total here is $E_{\text{i}} = {n \choose 2} + 2{n \choose 4}$. Therefore
+
+$$F = 1 + {n \choose 2} + 2{n \choose 4} - {n \choose 4} = 1 + {n \choose 2} + {n \choose 4}$$.
+
+This can be written as ${n \choose 0} + {n \choose 2} + {n \choose 4}$, and the pattern becomes even cleaner
+if we rewrite it as the sum of previous elements in Pascal's Triangle: ${n-1 \choose 0} + {n-1 \choose 1} + {n-1 \choose 2}
++ {n-1 \choose 3} + {n-1 \choose 4} = \sum_{i=0}^4 {n-1 \choose i}$, giving Moser's circle sequence and simultaneously
+explaining why $F_n = 2^{n-1}$ for \\ $n \in \{1, 2, 3, 4, 5\}$ but not $n = 6$.
+
+\item
+For each element of $S$, there are ${4 \choose 2} = 6$ ways we can choose exactly two subsets for it to belong to.
+However, if we have a set appear more than once in our 4-double cover, this will overcount, e.g. treating $\{A, A, B, C\}$
+and $\{A, B, C, A\}$ as different double covers.
+
+If two of our subsets are equal in the 4-double cover, the other two subsets must be exactly their complement.
+There are ${4 \choose 2} = 6$ ways of rearranging $\{A, A, A^c, A^c\}$, so each is overcounted 5 times. There are
+$|\mathcal{P}(S)| = 2^n$ ways of picking $A$, and each subset is double counted because it appears once as $A$ and once as $A^c$,
+so there are $2^{n-1}$ of these such repeat 4-double covers. In total, there are
+
+$$6^n - 5\cdot 2^{n-1} \text{ four-double covers in all.}$$
+
+\item
+
+\item
+The degree of any $n$ (i.e. number of dominoes including $n$) must be even, except possibly excluding endpoints,
+but there are 39 unordered dominoes that include $n$ in our set. This means the maximum is $\frac{38\cdot 40 + 2}{2} = 761$,
+and it just remains to show that it is possible. This can be done inductively, starting with all dominoes including 1 except
+for (1, 40) and ending with (1, 2), then doing the same with 2 excluding (2, 40) and ending with (2, 3), etc. This will give
+$2\sum_{i=0}^{19} (38 - 2i) = 760$, and then we can place (40, 1) at the very beginning or the very end to get 761 total.
+
+\item
+\begin{align*}
+S(m, n) & = \sum_{k=0}^{n-1} (-1)^k {n \choose k}(2^{n-k} - 1)^m \\
+& = \sum_{k=0}^{n-1} (-1)^k {n \choose k}\sum_{i=0}^m (-1)^{m-i} {m \choose i} 2^{i(n-k)} \\
+& = \sum_{k=0}^{n-1} \sum_{i=0}^m (-1)^{k+m-i} {n \choose k} {m \choose i} 2^{i(n-k)} \\
+& = \sum_{i=0}^{m} (-1)^{m-i} {m \choose i} 2^{in} \sum_{k=0}^{n-1} (-1)^k {n \choose k} 2^{-ik} \\
+& = \sum_{i=0}^{m} (-1)^{m-i} {m \choose i} 2^{in} \left[ \left( 1 - 2^{-i} \right)^n + (-1)^{n+1}2^{-in} \right] \\
+& = \sum_{i=0}^{m} (-1)^{m-i} {m \choose i} \left[ \left( 2^i - 1 \right)^n + (-1)^{n+1} \right] \\
+& = \sum_{i=0}^{m} (-1)^i {m \choose i} \left[ \left( 2^{m-i} - 1 \right)^n + (-1)^{n+1} \right] \\
+& = \sum_{i=0}^{m} (-1)^i {m \choose i} \left( 2^{m-i} - 1 \right)^n + (-1)^{n+1}\sum_{i=0}^{m} (-1)^i {m \choose i} \\
+& = \sum_{i=0}^{m} (-1)^i {m \choose i} \left( 2^{m-i} - 1 \right)^n + (-1)^{n+1}(1 - 1)^m \\
+& = \sum_{i=0}^{m - 1} (-1)^i {m \choose i} \left( 2^{m-i} - 1 \right)^n - (-1)^m \left(2^0 - 1)^n\right) \\
+& = \sum_{i=0}^{m - 1} (-1)^i {m \choose i} \left( 2^{m-i} - 1 \right)^n \\
+& = S(n, m)
+\end{align*}
+
+\item
+Let $f_n$ be the process of removing every other card in a stack of $n$ cards starting with the top card, and let $g_n$
+be a similar process but skipping the first card. Then there are $\left\lfloor \frac{n}{2} \right\rfloor$ elements
+remaining after $f_n$ and $\left\lfloor \frac{n+1}{2} \right\rfloor$ elements remaining after $g_n$. In addition,
+the top card will be taken if the previous process was $f_n : n$ even or $g_n : n$ odd. Therefore our sequence is
+
+$$f_{2000}\cdot f_{1000}\cdot f_{500}\cdot f_{250}\cdot f_{125}\cdot g_{62}\cdot g_{31}\cdot f_{16}\cdot f_{8}\cdot f_{4}\cdot f_{2}\cdot f_{1}$$
+
+Working backwards, position $k$ in $f_n$ was previously in position $2k - 1$ and passed elements were in position $2k$.
+This is reversed for $g_n$.
+Therefore, 1999 being in position 1 of $f_2$ means its sequence goes:
+
+$$1 \to 2 \to 4 \to 8 \to 15 \to 29 \to 58 \to 116 \to 232 \to 464 \to 928$$
+
+Therefore there were 927 cards above the card labeled 1999.
+
+\item
+This is a multinomial counting problem; the number of partitions is given by
+
+$$|P| = {|S| \choose n_1; 2n_2; \ldots; (k-1)n_{k-1}} = \frac{n!}{\prod_{i=1}^k (in_{i})!}$$
+
+\item
+The sum on the left is the total number of fixed points in the symmetry group $S_n$, so we either need to establish
+a bijection or prove that both sums are equal to the same known quantity.
+
+Using Fubini's Principle, we can count the number of fixed points in another way. Let 
+$S = \{S(i, \sigma) : i \text{ is a fixed point of } \sigma$. Then $\sum_{k=0}^n kp_n(k) = \sum_{\sigma \in S_n} |S(*, \sigma)|
+= \sum_{i =1}^n |S(i, *)|$.
+For a particular $i$, there are $n$ places for it to be mapped to, all with equal likelihood. Therefore it will be a
+fixed point in $|S(i, *)| = \frac{1}{n}|S_n| = \frac{n!}{n} = (n-1)!$ of the permutations in $S_n$, and
+$\sum_{i =1}^n |S(i, *)| = \sum_{i=1}^n (n-1)! = n(n-1)! = n!$.
+
+Continuing with this method, we only need to prove $\sum_{k=0}^n (k-1)^2 p_n (k) = n!$. First, note that
+$\sum_{k=0}^n {k \choose i} p_n (k)$ is the number of ways to pick $i$ elements from the $k$ fixed points
+The expression
+$\sum k {n \choose k} p_{n-k} (0)$ is the number of ways of  
+
+\item
+Let's break this into 3 cases, where there are 0, 1, or 2 mail-getting houses on the ends of the street. In all of these
+cases, let $k$ be the number of non-mail-getting houses and $i$ be the number of adjacent pairs of these.
+
+Case 1: Both ends of the street don't get mail. There
+are $k-1$ houses getting mail, and $2k-1 \leq 19 \leq 3k-1 \iff 7 \leq k \leq 10$. In addition, $2k - 1 + i = 19 \iff
+i = 20 - 2k$.
+
+Case 2: One end of the street gets mail. There are $k$ houses
+getting mail. Then $2k \leq 19 \leq 3k \iff 7 \leq k \leq 9$, and $i = 19 - 2k$.
+
+Case 3: Both ends of the street get mail. There are $k+1$ houses getting mail.
+Then $2k+1 \leq 19 \leq 3k+1 \iff 6 \leq k \leq 9$, and $i = 18 - 2k$.
+
+In all of these cases, there are $i$ instances of pairs of houses not getting mail, which can be chosen in ${k \choose i}$
+many ways. This totals up across the 3 cases to
+
+\begin{align*}
+& \sum_{k=6}^{10} {k \choose 20-2k} + 2{k \choose 19-2k} + {k \choose 18-2k} \\
+= & \sum_{k=6}^{10} {k+2 \choose 20-2k} = 351
+\end{align*}
+
+This is the Padovan sequence; Cases 3, 2, and 1 sum to $P_{21}$, $2P_{22}$, and $P_{23}$, respectively; all together
+they sum to $P_{27}$. Under the recursion $P_n = P_{n-2} + P_{n-3}$ the case sums are equivalent to
+$P_{24} + P_{25} = P_{27}$, as expected. In general, with $n$ houses on the street we will get $P_{n+8}$ different
+possible patterns of mail delivery.
+
+\item
+An \emph{interesting} coloring is counted 3 times, one for each direction it can face. For a coloring that is interesting
+along 2 axes this overcounts by 1, and for an interesting coloring along 3 axes this overcounts by 2.
+
+\item
+For $a + b = c + d = k \leq 2m + 1$, there are $\left \lfloor \frac{k-1}{2} \right \rfloor$ pairs that sum to $k$. For $k > 2m+1$, we
+can perform the transformation $f(a) = 2m + 1 - a$ to get $a + b = k \iff f(a) + f(b) = 4m + 2 - k < 2m+1$, meaning that there
+are $\left \lfloor \frac{4m + 1 - k}{2} \right \rfloor$ pairs that sum to $k$. A particular case is $k = 2m+1$, because this is
+the only instance of $\left \lfloor \frac{k-1}{2} \right \rfloor = m$. Assuming there can be no repeat elements among the set $\{ a, b, c, d \}$, there can be no overlap of the sets by
+$a + c = b + d$ or $a + d = b + c$:
+
+\begin{align*}
+& a + b = c + d \\
+& a + c = b + d \implies b - c = c - b \iff b = c \text{, or} \\
+& a + d = b + c \implies b - d = d - b \iff b = d
+\end{align*}
+
+Our total number of sets is then
+
+\begin{align*}
+4 \cdot \sum_{n = 2}^{m-1} {n \choose 2} + {m \choose 2} & = 4{m \choose 3} + {m \choose 2} \\
+& = {m + 1 \choose 3} + 3{m \choose 3} \text{, if you would prefer this form.} \\
+\end{align*}
+
+\item
+
+\item
+
+
+Let $s_n$ be the number of ways to tile a $2 \times n$ chessboard with the given boards, and for a specific tiling,
+let $k < n$ be the value of the top square just to the left of the rightmost place where the boards on the top
+and bottom terminate together.
+
+We must now determine the number of tilings of a $2 \times n$ board that satisfy $k=0$.
+Each end must have a $1 \times 2$ in one row and a $1 \times 3$ in the other,
+with one row being one square ahead of the other. Call the number of tilings of these $1 \times n-2$ and
+$1 \times n-3$ rows $m_n$. Then we may put a $1 \times 2$ board in the shorter row in $m_{n-1}$ many ways,
+or a $1 \times 3$ board in each row in $m_{n-3}$ many ways, giving the recursion (only valid for $n \geq 7$):
+
+$$m_n = m_{n-1} + m_{n-3}; \; (m_i) = (0, 0, 1, 1, 0, 2, 2) \text{ for } i = 0, 1, 2, 3, 4, 5, 6$$
+
+This recursion is solved with the generating function
+
+\begin{align*}
+m_n = [x^n]f(x) & = [x^n]\left(x^2 + x^3 + \frac{2x^5}{1 - x - x^3}\right) \\
+& = [x^n]\left(2 - x^2 + x^3 - \frac{2(1 - x - x^2)}{1 - x - x^3}\right)
+\end{align*}
+
+The tiling to the left of $k$ is a representative of $s_k$, and the tiling to the right of $k$ is a representative of
+$m_{n-k}$. Therefore, calling $g(x)$ the generating function for $\{ s_n \}$, we can write
+
+\begin{align*}
+s_n & = [x^n]g(x) \\
+& = \sum_{k=0}^{n-1} s_k m_{n-k} \\
+& = [x^{n-1}] (g(x) \cdot xf(x))
+\end{align*}
+
+\item
+
+\item
+
+\item
+
+\item
+
+\item
+
+\item
+
+\item
+
+\item
+
+\item
+
+\end{enumerate}
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
